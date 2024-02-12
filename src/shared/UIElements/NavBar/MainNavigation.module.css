@@ -1,0 +1,76 @@
+.navbar {
+  height: 10vh;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0 2rem;
+  color: #fff;
+}
+
+.logoBox {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgb(18, 125, 4);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #fff;
+}
+
+.menuBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.menuBox svg {
+  font-size: 2rem;
+}
+
+.searchBox {
+  flex: 1;
+  display: flex;
+
+  position: relative;
+  justify-content: center;
+}
+
+.searchBox input {
+  width: 90%;
+  padding: 0.9rem;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+}
+
+.searchBox svg {
+  position: absolute;
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.watchlist a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}
+
+.loginBox a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}
+
+.sideMenu

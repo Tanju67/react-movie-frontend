@@ -1,13 +1,22 @@
-import { useState } from "react";
-
-const KEY = "a36111d7";
-const query = "";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import MainNavigation from "./shared/UIElements/NavBar/MainNavigation";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <BrowserRouter>
+      <MainNavigation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
+
+// const KEY = "a36111d7";
+// const query = "";
 
 // const fetchData = async () => {
 //   try {
