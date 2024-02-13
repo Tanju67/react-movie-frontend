@@ -1,12 +1,13 @@
 .navbar {
   height: 10vh;
-  background-color: #222;
+  background-color: #111;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
   padding: 0 2rem;
   color: #fff;
+  position: relative;
 }
 
 .logoBox {
@@ -23,11 +24,14 @@
 
 .menuBox {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
+  width: 8rem;
 }
-.menuBox svg {
+
+.menuBox svg,
+.times {
   font-size: 2rem;
 }
 
@@ -73,4 +77,57 @@
   color: #fff;
 }
 
-.sideMenu
+.box {
+  padding: 0.5rem;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+
+.box:hover {
+  background-color: #222;
+}
+
+.sideMenu {
+  position: absolute;
+  height: 90vh;
+  width: 0;
+  background-color: #111;
+  top: 10vh;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 1rem;
+  padding-top: 4rem;
+}
+
+.sideMenu li {
+  background-color: #fff;
+  padding: 0.5rem 1.5rem;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border-radius: 0.5rem 0 0 0;
+  transition: all 0.5s;
+  transition-delay: 0.4s;
+}
+
+.sideMenu a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.open {
+  width: 23rem;
+  opacity: 1;
+}
+
+.open li {
+  width: 80%;
+  height: 3.5rem;
+  opacity: 1;
+}
