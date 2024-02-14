@@ -19,11 +19,11 @@ function ExploreFilms() {
         {filmList.map((item, i) => (
           <div key={i} className={classes.filmItem}>
             <div className={classes.poster}>
-              <img src={films[item]?.Poster} alt={films[item].Title} />
+              <img src={films[item]?.Poster} alt={films[item]?.Title} />
             </div>
             <div className={classes.info}>
-              <h4>{films[item].Title}</h4>
-              <p>{films[item].Year}</p>
+              <h4>{films[item]?.Title}</h4>
+              <p>{films[item]?.Year}</p>
             </div>
           </div>
         ))}
