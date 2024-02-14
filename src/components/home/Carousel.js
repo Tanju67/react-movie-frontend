@@ -5,13 +5,15 @@ import film2 from "../../assets/MCDBARB_WB055.webp";
 import film3 from "../../assets/back-to-the-future-lloyd-michael-j-fox.jpeg";
 import film4 from "../../assets/The-Godfather.webp";
 import { carouselFilmData } from "../../data/filmData";
+import useInterval from "../../shared/hooks/useInterval";
 
 const filmList = [film1, film2, film3, film4];
 
 function Carousel() {
   const [slideIndex, setSlideIndex] = useState(0);
 
-  const nextSlide = () => {
+  const nextSlide = async () => {
+    console.log(slideIndex);
     if (slideIndex === 3) {
       setSlideIndex(0);
     } else {
@@ -26,6 +28,11 @@ function Carousel() {
       setSlideIndex((prev) => prev - 1);
     }
   };
+
+  useInterval(() => {
+    nextSlide();
+  }, 5000);
+
   return (
     <div className={classes.carousel}>
       <div className={classes.boxCarousel}>
