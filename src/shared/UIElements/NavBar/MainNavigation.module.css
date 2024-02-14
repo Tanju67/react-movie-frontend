@@ -102,6 +102,7 @@
   align-items: flex-end;
   gap: 1rem;
   padding-top: 4rem;
+  z-index: 1000;
 }
 
 .sideMenu li {
