@@ -13,7 +13,6 @@ function Carousel() {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const nextSlide = async () => {
-    console.log(slideIndex);
     if (slideIndex === 3) {
       setSlideIndex(0);
     } else {

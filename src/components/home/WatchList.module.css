@@ -1,0 +1,38 @@
+.watchlist {
+  background-color: #111;
+  color: #fff;
+  height: 80vh;
+}
+
+.watchlist h2 {
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+.notSignIn {
+  text-align: center;
+  margin-top: 6rem;
+}
+
+.notSignIn svg {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.notSignIn p {
+  margin-bottom: 1rem;
+}
+
+.notSignIn button {
+  margin-top: 1rem;
+  padding: 0.8rem 4rem;
+  font-size: 1.6rem;
+  color: #fff;
+  background-color: #222;
+  border: none;
+  cursor: pointer;
+}
+
+.notSignIn button:hover {
+  background-color: #222922;
+}
