@@ -1,21 +1,22 @@
 .carousel {
   flex: 2;
   box-shadow: rgba(0, 0, 0, 0.25);
+  display: flex;
 }
 
 .boxCarousel {
-  width: 80rem;
   display: flex;
   overflow: hidden;
   position: relative;
+  flex: 1;
 }
 
 .slide {
-  width: 80rem;
   transition: all 0.3s;
   position: absolute;
   transform: translateX(70rem);
   z-index: -10;
+  width: 100%;
 }
 .activeSlide {
   transform: translateX(0);
@@ -28,8 +29,8 @@
   z-index: -10;
 }
 .slideImg {
-  width: 80rem;
-  height: 80vh;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }

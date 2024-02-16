@@ -28,9 +28,9 @@ function Carousel() {
     }
   };
 
-  useInterval(() => {
-    nextSlide();
-  }, 5000);
+  // useInterval(() => {
+  //   nextSlide();
+  // }, 5000);
 
   return (
     <div className={classes.carousel}>

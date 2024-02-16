@@ -1,7 +1,9 @@
 .watchlist {
-  background-color: #111;
+  padding: 8rem 2rem;
   color: #fff;
-  height: 80vh;
+
+  background-color: #111;
+  position: relative;
 }
 
 .watchlist h2 {

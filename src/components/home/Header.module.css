@@ -1,4 +1,9 @@
 .header {
   display: flex;
   padding: 1rem;
+  height: 90vh;
+  gap: 1rem;
+  max-width: 125rem;
+  margin: 0 auto;
+  background-color: #222;
 }

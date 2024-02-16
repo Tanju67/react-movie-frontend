@@ -3,12 +3,14 @@ import classes from "./FilmsCarousel.module.css";
 
 function FilmsCarousel({ filmList, mainTitle, subTitle }) {
   const [slideIndex, setSlideIndex] = useState(0);
-  const [screenWidth, setScreenWidtth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidtth] = useState(
+    window.innerWidth > 1280 ? 1280 : window.innerWidth
+  );
   const width = Math.trunc((250 * filmList.length - 20) / screenWidth);
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenWidtth(window.innerWidth);
+      setScreenWidtth(window.innerWidth > 1280 ? 1280 : window.innerWidth);
     };
 
     window.addEventListener("resize", handleResize);
@@ -19,7 +21,7 @@ function FilmsCarousel({ filmList, mainTitle, subTitle }) {
   }, [screenWidth]);
 
   const nextSlide = () => {
-    console.log(filmList.length);
+    console.log(window.innerWidth);
     if (slideIndex === width) {
       return;
     } else {
@@ -39,13 +41,21 @@ function FilmsCarousel({ filmList, mainTitle, subTitle }) {
       <div onClick={prevSlide} className={classes.left}>
         <span> &larr; </span>
       </div>
-      <div onClick={nextSlide} className={classes.right}>
+      <div
+        onClick={nextSlide}
+        className={classes.right}
+        style={{
+          right: `${window.innerWidth > 1280 ? window.innerWidth - 1385 : 0}px`,
+        }}
+      >
         <span> &rarr; </span>
       </div>
       <h1>{mainTitle}</h1>
       <h2>{subTitle}</h2>
       <div
-        style={{ transform: `translateX(${-100 * slideIndex}vw)` }}
+        style={{
+          transform: `translateX(${-(screenWidth - 30) * slideIndex}px)`,
+        }}
         className={`${classes.toptenCarousel} `}
       >
         {filmList.map((item, i) => (

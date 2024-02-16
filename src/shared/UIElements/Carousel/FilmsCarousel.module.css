@@ -1,3 +1,9 @@
+.carousel {
+  width: 125rem;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
 .carousel h1 {
   margin-bottom: 3rem;
   color: rgb(18, 125, 4);
@@ -10,7 +16,7 @@
   display: flex;
   transition: all 0.3s;
   gap: 2rem;
-  width: min-content;
+  width: 124rem;
 }
 
 .item {
@@ -47,6 +53,7 @@
   color: #fff;
   border: 1px solid #fff;
   padding: 1rem;
+  background-color: rgba(17, 17, 17, 0.5);
 }
 
 .right {
@@ -54,11 +61,11 @@
   font-size: 2rem;
   position: absolute;
   top: 50%;
-  right: 0;
   transform: translateY(-50%);
   color: #fff;
   border: 1px solid #fff;
   padding: 1rem;
+  background-color: rgba(17, 17, 17, 0.5);
 }
 
 .nextSlides {

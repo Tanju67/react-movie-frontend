@@ -6,11 +6,11 @@ import useInterval from "../../shared/hooks/useInterval";
 
 function ExploreFilms() {
   const [filmList, setFilmList] = useState(
-    generateRandomArray(3, films.length)
+    generateRandomArray(3, films.length, films)
   );
 
   useInterval(() => {
-    setFilmList(generateRandomArray(3, films.length));
+    setFilmList(generateRandomArray(3, films.length, films));
   }, 30000);
   return (
     <div className={classes.explore}>
@@ -19,11 +19,11 @@ function ExploreFilms() {
         {filmList.map((item, i) => (
           <div key={i} className={classes.filmItem}>
             <div className={classes.poster}>
-              <img src={films[item]?.Poster} alt={films[item]?.Title} />
+              <img src={item?.Poster} alt={item?.Title} />
             </div>
             <div className={classes.info}>
-              <h4>{films[item]?.Title}</h4>
-              <p>{films[item]?.Year}</p>
+              <h4>{item?.Title}</h4>
+              <p>{item?.Year}</p>
             </div>
           </div>
         ))}
