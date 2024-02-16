@@ -383,3 +383,86 @@ export const films = [
       "https://m.media-amazon.com/images/M/MV5BNjJlYmNkZGItM2NhYy00MjlmLTk5NmQtNjg1NmM2ODU4OTMwXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
   },
 ];
+
+export const topTenTVShows = [
+  {
+    Title: "Breaking Bad",
+    Year: "2008–2013",
+    imdbID: "tt0903747",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BYmQ4YWMxYjUtNjZmYi00MDQ1LWFjMjMtNjA5ZDdiYjdiODU5XkEyXkFqcGdeQXVyMTMzNDExODE5._V1_SX300.jpg",
+  },
+  {
+    Title: "Planet Earth II",
+    Year: "2016",
+    imdbID: "tt5491994",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BMGZmYmQ5NGQtNWQ1MC00NWZlLTg0MjYtYjJjMzQ5ODgxYzRkXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_SX300.jpg",
+  },
+  {
+    Title: "Planet Earth",
+    Year: "2006",
+    imdbID: "tt0795176",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BMzMyYjg0MGMtMTlkMy00OGFiLWFiNTYtYmFmZWNmMDFlMzkwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_SX300.jpg",
+  },
+  {
+    Title: "Band of Brothers",
+    Year: "2001",
+    imdbID: "tt0185906",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BMTI3ODc2ODc0M15BMl5BanBnXkFtZTYwMjgzNjc3._V1_SX300.jpg",
+  },
+  {
+    Title: "Chernobyl",
+    Year: "2019",
+    imdbID: "tt7366338",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BNTdkN2QwMDItMDVhNS00ZjFiLWEzNTctMzY5ODQzYWNkMDllXkEyXkFqcGdeQXVyMTMzNDExODE5._V1_SX300.jpg",
+  },
+  {
+    Title: "The Wire",
+    Year: "2002–2008",
+    imdbID: "tt0306414",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BZmY5ZDMxODEtNWIwOS00NjdkLTkyMjktNWRjMDhmYjJjN2RmXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+  },
+  {
+    Title: "Avatar: The Last Airbender",
+    Year: "2005–2008",
+    imdbID: "tt0417299",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BODc5YTBhMTItMjhkNi00ZTIxLWI0YjAtNTZmOTY0YjRlZGQ0XkEyXkFqcGdeQXVyODUwNjEzMzg@._V1_SX300.jpg",
+  },
+  {
+    Title: "Blue Planet II",
+    Year: "2017",
+    imdbID: "tt6769208",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BNDZiNDllMTAtOTgxZi00NzNiLWFhNzUtOGUwZWZjZGNjZTMyXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_SX300.jpg",
+  },
+  {
+    Title: "The Sopranos",
+    Year: "1999–2007",
+    imdbID: "tt0141842",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BNmU3MjkzZWQtOTk1Ni00OTNiLWJhMmMtNmEyN2JjZjUzZDUyXkEyXkFqcGdeQXVyNDIyNjA2MTk@._V1_SX300.jpg",
+  },
+  {
+    Title: "Cosmos: A Spacetime Odyssey",
+    Year: "2014",
+    imdbID: "tt2395695",
+    Type: "series",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BZTk5OTQyZjYtMDk3Yy00YjhmLWE2MTYtZmY4NTg1YWUzZTQ0XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+  },
+];
