@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MainNavigation from "./shared/UIElements/NavBar/MainNavigation";
+import WatchlistPage from "./pages/WatchlistPage";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <MainNavigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/watchlist" element={<WatchlistPage />} />
       </Routes>
     </BrowserRouter>
   );

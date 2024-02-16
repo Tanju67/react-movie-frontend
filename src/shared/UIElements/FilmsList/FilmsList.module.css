@@ -1,0 +1,66 @@
+.filmList {
+  color: #fff;
+  padding: 2rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.page {
+  padding: 1rem;
+  background-color: #222;
+}
+
+.icon {
+  padding: 1rem;
+  background-color: #222;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.icon svg {
+  transition: all 0.3s;
+  padding: 1px;
+  border-radius: 50%;
+}
+
+.icon svg:hover {
+  transform: scale(1.2);
+  background-color: #000;
+}
+
+.filmsBox {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  row-gap: 6rem;
+}
+
+.item {
+  width: 18%;
+  height: 42rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.poster {
+  flex: 1;
+  height: 30rem;
+}
+.poster img {
+  width: 100%;
+  height: 30rem;
+}
+
+.info {
+  background-color: #222;
+  flex: 1;
+  padding: 1rem;
+}
