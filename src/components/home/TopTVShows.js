@@ -7,7 +7,7 @@ import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";
 function TopTVShows() {
   return (
     <div className={classes.tvShows}>
-      <FilmsCarousel filmList={topTenTVShows} subTitle={"Top Ten TV Shows >"} />
+      <FilmsCarousel filmList={topTenTVShows} subTitle={"Top 10 TV Shows >"} />
     </div>
   );
 }

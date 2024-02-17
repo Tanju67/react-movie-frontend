@@ -16,7 +16,9 @@ function MainNavigation() {
   return (
     <nav className={classes.navbar}>
       <div className={classes.logoBox}>
-        <BiMoviePlay /> <span>R-MOVIE</span>
+        <NavLink to={"/"}>
+          <BiMoviePlay /> <span>R-MOVIE</span>
+        </NavLink>
       </div>
       <div
         className={`${classes.box} ${classes.menuBox}`}
@@ -34,7 +36,7 @@ function MainNavigation() {
         <CiSearch />
       </div>
       <div className={`${classes.box} ${classes.watchlist}`}>
-        <NavLink>
+        <NavLink to={"/watchlist"}>
           <MdBookmarkAdd />
           <span>Watchlist</span>
         </NavLink>

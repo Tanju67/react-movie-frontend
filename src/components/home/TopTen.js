@@ -9,7 +9,7 @@ function TopTen() {
       <FilmsCarousel
         filmList={topTen}
         mainTitle={"What to watch"}
-        subTitle={"Top 10 >"}
+        subTitle={"Top 10 Movies >"}
       />
     </div>
   );

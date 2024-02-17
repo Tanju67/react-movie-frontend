@@ -10,7 +10,7 @@
   position: relative;
 }
 
-.logoBox {
+.logoBox a {
   font-weight: bold;
   display: flex;
   justify-content: center;
