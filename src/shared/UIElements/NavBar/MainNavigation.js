@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./MainNavigation.module.css";
 import { IoMenu } from "react-icons/io5";
 import { BiMoviePlay } from "react-icons/bi";
@@ -9,39 +9,29 @@ import { IoLogInOutline } from "react-icons/io5";
 import { HiTrophy } from "react-icons/hi2";
 import DropdownSearch from "./DropdownSearch";
 import { useHttpRequest } from "../../hooks/fetchData-hook";
+import { OMDbApiContext } from "../../context/omdbApi-context";
 
-const KEY = "a36111d7";
 function MainNavigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [total, setTotal] = useState(0);
-  const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
+  const { query, setMovies, fetchFilmData, setQuery, movies, totalResults } =
+    useContext(OMDbApiContext);
+  // const [query, setQuery] = useState("");
+  // const [movies, setMovies] = useState([]);
+  // const [total, setTotal] = useState(0);
+  // const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
   const toggleSidebar = () => {
     setIsSidebarOpen((isOpen) => !isOpen);
   };
-  console.log(movies);
 
   useEffect(() => {
     if (query.length < 3) return setMovies([]);
     const controller = new AbortController();
-    sendRequest(
-      `http://www.omdbapi.com/?s=${query}&apikey=${KEY}`,
+    fetchFilmData(controller.signal, query);
 
-      "GET",
-      controller.signal,
-      undefined,
-      undefined,
-      (data) => {
-        setMovies(data.Search ? data.Search : []);
-        setTotal(data.totalResults ? data.totalResults : 0);
-        console.log(data);
-      }
-    );
     return () => {
       controller.abort();
     };
-  }, [query, sendRequest]);
+  }, [query, fetchFilmData, setMovies]);
 
   const inputHandler = async (e) => {
     setQuery(e.target.value);
@@ -73,7 +63,7 @@ function MainNavigation() {
         />
         <CiSearch />
         {query.length > 0 && (
-          <DropdownSearch movies={movies} query={query} total={total} />
+          <DropdownSearch movies={movies} query={query} total={totalResults} />
         )}
       </form>
       <div className={`${classes.box} ${classes.watchlist}`}>

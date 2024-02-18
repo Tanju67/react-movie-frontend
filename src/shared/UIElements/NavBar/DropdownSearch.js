@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./DropdownSearch.module.css";
+import { NavLink } from "react-router-dom";
+import { OMDbApiContext } from "../../context/omdbApi-context";
 
 function DropdownSearch({ movies, query }) {
+  const { setQuery } = useContext(OMDbApiContext);
   return (
     <div className={classes.dropdown}>
       <div className={classes.filmsContainer}>
@@ -17,10 +20,14 @@ function DropdownSearch({ movies, query }) {
             </div>
           </div>
         ))}
-        <div className={classes.film}>
+        <NavLink
+          onClick={() => setQuery("")}
+          to={"/films"}
+          className={classes.film}
+        >
           {movies.length === 0 && <p>No film found for "{query}"</p>}
           {movies.length > 0 && <p>See all results for "{query}"</p>}
-        </div>
+        </NavLink>
       </div>
     </div>
   );

@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./FilmsList.module.css";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
+import { OMDbApiContext } from "../../context/omdbApi-context";
 
 function FilmsList({ filmList }) {
+  const { page, totalResults, setPage } = useContext(OMDbApiContext);
+  const totalPage = Math.ceil(totalResults / 10);
+
+  const increasePageHandler = () => {
+    if (page === totalPage) return;
+    setPage((prev) => prev + 1);
+  };
+
+  const decreasePageHandler = () => {
+    if (page === 1) return;
+    setPage((prev) => prev - 1);
+  };
   return (
     <div className={classes.filmList}>
       <div className={classes.nav}>
-        <span className={classes.page}>Page: 1 - 169 found</span>
+        <span className={classes.page}>
+          Page: {page} - {totalResults} found
+        </span>
         <span className={classes.icon}>
-          <FaAngleLeft />
-          <FaAngleRight />
+          <FaAngleLeft onClick={decreasePageHandler} />
+          <FaAngleRight onClick={increasePageHandler} />
         </span>
       </div>
       <div className={classes.filmsBox}>
