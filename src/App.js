@@ -4,6 +4,7 @@ import MainNavigation from "./shared/UIElements/NavBar/MainNavigation";
 import WatchlistPage from "./pages/WatchlistPage";
 import FilmDetailPage from "./pages/FilmDetailPage";
 import SearchResultPage from "./pages/SearchResultPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <MainNavigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/watchlist" element={<WatchlistPage />} />
-        <Route path="/films" element={<SearchResultPage />} />
+        <Route path="/films/:id" element={<SearchResultPage />} />
         <Route path="/:id" element={<FilmDetailPage />} />
       </Routes>
     </BrowserRouter>

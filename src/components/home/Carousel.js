@@ -6,6 +6,7 @@ import film3 from "../../assets/back-to-the-future-lloyd-michael-j-fox.jpeg";
 import film4 from "../../assets/The-Godfather.webp";
 import { carouselFilmData } from "../../data/filmData";
 import useInterval from "../../shared/hooks/useInterval";
+import { NavLink } from "react-router-dom";
 
 const filmList = [film1, film2, film3, film4];
 
@@ -56,10 +57,13 @@ function Carousel() {
               <div className={classes.poster}>
                 <img src={carouselFilmData[i].Poster} alt="poster" />
               </div>
-              <div className={classes.info}>
+              <NavLink
+                to={`/${carouselFilmData[i].imdbID}`}
+                className={classes.info}
+              >
                 <h2>{carouselFilmData[i].Title}</h2>
                 <p>{carouselFilmData[i].Year}</p>
-              </div>
+              </NavLink>
             </div>
           </div>
         ))}

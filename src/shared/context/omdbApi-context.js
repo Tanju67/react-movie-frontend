@@ -3,29 +3,37 @@ import { useHttpRequest } from "../hooks/fetchData-hook";
 
 export const OMDbApiContext = createContext({
   query: "",
+  storage: "",
   page: 1,
   movies: [],
+  film: {},
   totalResults: 0,
   allMovies: [],
   setQuery: () => {},
   setPage: () => {},
   setMovies: () => {},
+  setFilm: () => {},
   setTotalResults: () => {},
+  setStorage: () => {},
   fetchFilmData: () => {},
   setAllMovies: () => {},
   fetchAllMovies: () => {},
+  fetchDetailMovie: () => {},
 });
 
 const KEY = "a36111d7";
 export const Provider = (props) => {
   const [query, setQuery] = useState("");
+  const [storage, setStorage] = useState("");
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
+  const [film, setFilm] = useState({});
   const [allMovies, setAllMovies] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
 
   const fetchFilmData = useCallback((controller, query) => {
+    localStorage.clear();
     sendRequest(
       `http://www.omdbapi.com/?s=${query}&apikey=${KEY}`,
       "GET",
@@ -39,9 +47,9 @@ export const Provider = (props) => {
     );
   }, []);
 
-  const fetchAllMovies = useCallback((page) => {
+  const fetchAllMovies = useCallback((page, searchQuery) => {
     sendRequest(
-      `http://www.omdbapi.com/?s=${"matrix"}&page=${page}&apikey=${KEY}`,
+      `http://www.omdbapi.com/?s=${searchQuery}&page=${page}&apikey=${KEY}`,
       "GET",
       undefined,
       undefined,
@@ -54,12 +62,28 @@ export const Provider = (props) => {
     );
   }, []);
 
+  const fetchDetailMovie = useCallback((id) => {
+    sendRequest(
+      `http://www.omdbapi.com/?i=${id}&apikey=${KEY}`,
+      "GET",
+      undefined,
+      undefined,
+      undefined,
+      (data) => {
+        setFilm(data ? data : {});
+        console.log(data);
+      }
+    );
+  }, []);
+
   return (
     <OMDbApiContext.Provider
       value={{
         query,
+        storage,
         page,
         movies,
+        film,
         allMovies,
         totalResults,
         setQuery,
@@ -67,8 +91,11 @@ export const Provider = (props) => {
         setMovies,
         setTotalResults,
         setAllMovies,
+        setStorage,
+        setFilm,
         fetchFilmData,
         fetchAllMovies,
+        fetchDetailMovie,
       }}
     >
       {props.children}

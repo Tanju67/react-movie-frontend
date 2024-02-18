@@ -3,6 +3,7 @@ import classes from "./FilmsList.module.css";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
 import { OMDbApiContext } from "../../context/omdbApi-context";
+import { NavLink } from "react-router-dom";
 
 function FilmsList({ filmList }) {
   const { page, totalResults, setPage } = useContext(OMDbApiContext);
@@ -34,12 +35,12 @@ function FilmsList({ filmList }) {
             <div className={classes.poster}>
               <img src={item?.Poster} alt="poster" />
             </div>
-            <div className={classes.info}>
+            <NavLink to={`/${item.imdbID}`} className={classes.info}>
               <h4>
                 {i + 1}.{item?.Title}
               </h4>
               <p>{item?.Year}</p>
-            </div>
+            </NavLink>
           </div>
         ))}
       </div>

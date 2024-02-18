@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./FilmsCarousel.module.css";
+import { NavLink } from "react-router-dom";
 
 function FilmsCarousel({ filmList, mainTitle, subTitle }) {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -63,12 +64,12 @@ function FilmsCarousel({ filmList, mainTitle, subTitle }) {
             <div className={classes.poster}>
               <img src={item?.Poster} alt="poster" />
             </div>
-            <div className={classes.info}>
+            <NavLink to={`/${item.imdbID}`} className={classes.info}>
               <h4>
                 {i + 1}.{item?.Title}
               </h4>
               <p>{item?.Year}</p>
-            </div>
+            </NavLink>
           </div>
         ))}
       </div>

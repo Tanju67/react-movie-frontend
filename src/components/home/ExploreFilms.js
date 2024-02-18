@@ -3,6 +3,7 @@ import classes from "./ExploreFilms.module.css";
 import { films } from "../../data/filmData";
 import { generateRandomArray } from "../../utils/util";
 import useInterval from "../../shared/hooks/useInterval";
+import { NavLink } from "react-router-dom";
 
 function ExploreFilms() {
   const [filmList, setFilmList] = useState(
@@ -21,10 +22,10 @@ function ExploreFilms() {
             <div className={classes.poster}>
               <img src={item?.Poster} alt={item?.Title} />
             </div>
-            <div className={classes.info}>
+            <NavLink to={`/${item?.imdbID}`} className={classes.info}>
               <h4>{item?.Title}</h4>
               <p>{item?.Year}</p>
-            </div>
+            </NavLink>
           </div>
         ))}
       </div>

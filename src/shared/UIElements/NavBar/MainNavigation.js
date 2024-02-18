@@ -8,17 +8,13 @@ import { MdBookmarkAdd } from "react-icons/md";
 import { IoLogInOutline } from "react-icons/io5";
 import { HiTrophy } from "react-icons/hi2";
 import DropdownSearch from "./DropdownSearch";
-import { useHttpRequest } from "../../hooks/fetchData-hook";
 import { OMDbApiContext } from "../../context/omdbApi-context";
 
 function MainNavigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { query, setMovies, fetchFilmData, setQuery, movies, totalResults } =
     useContext(OMDbApiContext);
-  // const [query, setQuery] = useState("");
-  // const [movies, setMovies] = useState([]);
-  // const [total, setTotal] = useState(0);
-  // const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
+
   const toggleSidebar = () => {
     setIsSidebarOpen((isOpen) => !isOpen);
   };
@@ -73,7 +69,7 @@ function MainNavigation() {
         </NavLink>
       </div>
       <div className={`${classes.box} ${classes.loginBox}`}>
-        <NavLink>
+        <NavLink to={"/login"}>
           <IoLogInOutline />
           <span>Login</span>
         </NavLink>

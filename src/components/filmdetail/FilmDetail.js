@@ -1,40 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import classes from "./FilmDetail.module.css";
 import { MdBookmarkAdd } from "react-icons/md";
 import { MdRateReview } from "react-icons/md";
-
-const film = {
-  Title: "Matrix",
-  Year: "1993",
-  Rated: "N/A",
-  Released: "01 Mar 1993",
-  Runtime: "60 min",
-  Genre: "Action, Drama, Fantasy",
-  Director: "N/A",
-  Writer: "Grenville Case",
-  Actors: "Nick Mancuso, Phillip Jarrett, Carrie-Anne Moss",
-  Plot: 'Steven Matrix is one of the underworld\'s foremost hitmen until his luck runs out, and someone puts a contract out on him. Shot in the forehead by a .22 pistol, Matrix "dies" and finds himself in "The City In Between", where he is ...',
-  Language: "English",
-  Country: "Canada",
-  Awards: "1 win",
-  Poster:
-    "https://m.media-amazon.com/images/M/MV5BYzUzOTA5ZTMtMTdlZS00MmQ5LWFmNjEtMjE5MTczN2RjNjE3XkEyXkFqcGdeQXVyNTc2ODIyMzY@._V1_SX300.jpg",
-  Ratings: [
-    {
-      Source: "Internet Movie Database",
-      Value: "7.8/10",
-    },
-  ],
-  Metascore: "N/A",
-  imdbRating: "7.8",
-  imdbVotes: "206",
-  imdbID: "tt0106062",
-  Type: "series",
-  totalSeasons: "N/A",
-  Response: "True",
-};
+import { useParams } from "react-router-dom";
+import { OMDbApiContext } from "../../shared/context/omdbApi-context";
 
 function FilmDetail() {
+  const { film, fetchDetailMovie } = useContext(OMDbApiContext);
+  const filmId = useParams().id;
+
+  useEffect(() => {
+    fetchDetailMovie(filmId);
+  }, [fetchDetailMovie, filmId]);
+
   return (
     <div className={classes.detail}>
       <div className={classes.film}>

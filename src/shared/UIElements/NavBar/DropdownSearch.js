@@ -4,7 +4,11 @@ import { NavLink } from "react-router-dom";
 import { OMDbApiContext } from "../../context/omdbApi-context";
 
 function DropdownSearch({ movies, query }) {
-  const { setQuery } = useContext(OMDbApiContext);
+  const { setQuery, setStorage } = useContext(OMDbApiContext);
+
+  const clickHandler = () => {
+    setQuery("");
+  };
   return (
     <div className={classes.dropdown}>
       <div className={classes.filmsContainer}>
@@ -13,16 +17,20 @@ function DropdownSearch({ movies, query }) {
             <div className={classes.poster}>
               <img src={item.Poster} alt={item.Title} />
             </div>
-            <div className={classes.description}>
+            <NavLink
+              onClick={clickHandler}
+              to={`/${item.imdbID}`}
+              className={classes.description}
+            >
               <h4>{item.Title}</h4>
               <p>{item.Year}</p>
               <p>{item?.Actress}</p>
-            </div>
+            </NavLink>
           </div>
         ))}
         <NavLink
-          onClick={() => setQuery("")}
-          to={"/films"}
+          onClick={clickHandler}
+          to={`/films/${query}`}
           className={classes.film}
         >
           {movies.length === 0 && <p>No film found for "{query}"</p>}
