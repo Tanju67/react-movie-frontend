@@ -38,7 +38,6 @@
 .searchBox {
   flex: 1;
   display: flex;
-
   position: relative;
   justify-content: center;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./MainNavigation.module.css";
 import { IoMenu } from "react-icons/io5";
 import { BiMoviePlay } from "react-icons/bi";
@@ -7,11 +7,44 @@ import { NavLink } from "react-router-dom";
 import { MdBookmarkAdd } from "react-icons/md";
 import { IoLogInOutline } from "react-icons/io5";
 import { HiTrophy } from "react-icons/hi2";
+import DropdownSearch from "./DropdownSearch";
+import { useHttpRequest } from "../../hooks/fetchData-hook";
 
+const KEY = "a36111d7";
 function MainNavigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const [movies, setMovies] = useState([]);
+  const [total, setTotal] = useState(0);
+  const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
   const toggleSidebar = () => {
     setIsSidebarOpen((isOpen) => !isOpen);
+  };
+  console.log(movies);
+
+  useEffect(() => {
+    if (query.length < 3) return setMovies([]);
+    const controller = new AbortController();
+    sendRequest(
+      `http://www.omdbapi.com/?s=${query}&apikey=${KEY}`,
+
+      "GET",
+      controller.signal,
+      undefined,
+      undefined,
+      (data) => {
+        setMovies(data.Search ? data.Search : []);
+        setTotal(data.totalResults ? data.totalResults : 0);
+        console.log(data);
+      }
+    );
+    return () => {
+      controller.abort();
+    };
+  }, [query, sendRequest]);
+
+  const inputHandler = async (e) => {
+    setQuery(e.target.value);
   };
   return (
     <nav className={classes.navbar}>
@@ -31,10 +64,18 @@ function MainNavigation() {
         )}
         <span>Menu</span>
       </div>
-      <div className={classes.searchBox}>
-        <input type="text" placeholder="Search Movie" />
+      <form className={classes.searchBox}>
+        <input
+          onChange={inputHandler}
+          value={query}
+          type="text"
+          placeholder="Search Movie"
+        />
         <CiSearch />
-      </div>
+        {query.length > 0 && (
+          <DropdownSearch movies={movies} query={query} total={total} />
+        )}
+      </form>
       <div className={`${classes.box} ${classes.watchlist}`}>
         <NavLink to={"/watchlist"}>
           <MdBookmarkAdd />
