@@ -1,15 +1,15 @@
 .modal {
   width: 50%;
-  height: 25rem;
-  background-color: #111;
+  background-color: rgba(0, 0, 0, 0.75);
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.modal span {
+.closeBtn {
   font-size: 3rem;
   background-color: #222;
   position: absolute;
@@ -24,8 +24,9 @@
   cursor: pointer;
   transition: all 0.3s;
   color: #fff;
+  z-index: 1000;
 }
 
-.modal span:hover {
+.closeBtn:hover {
   transform: rotate(180deg);
 }

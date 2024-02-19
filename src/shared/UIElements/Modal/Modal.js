@@ -3,12 +3,14 @@ import ReactDOM from "react-dom";
 import Backdrop from "./Backdrop";
 import classes from "./Modal.module.css";
 
-function Modal({ children, className, onClick }) {
+function Modal({ children, className, onClick, onClose }) {
   const content = (
     <>
       <Backdrop onClick={onClick} />
-      <div className={`${classes.modal} ${className}`}>
-        <span onClick={onClick}>&times;</span>
+      <div onClick={onClose} className={`${classes.modal} ${className}`}>
+        <span className={classes.closeBtn} onClick={onClick}>
+          &times;
+        </span>
         {children}
       </div>
     </>
