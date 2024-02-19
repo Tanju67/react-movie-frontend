@@ -1,13 +1,22 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./FilmDetail.module.css";
 import { MdBookmarkAdd } from "react-icons/md";
 import { MdRateReview } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import { OMDbApiContext } from "../../shared/context/omdbApi-context";
+import Modal from "../../shared/UIElements/Modal/Modal";
 
 function FilmDetail() {
   const { film, fetchDetailMovie } = useContext(OMDbApiContext);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const filmId = useParams().id;
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+  const hideModal = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     fetchDetailMovie(filmId);
@@ -37,11 +46,11 @@ function FilmDetail() {
           </p>
 
           <div className={classes.btnBox}>
-            <button className={classes.watchBtn}>
+            <button onClick={showModal} className={classes.watchBtn}>
               <MdBookmarkAdd />
               <span>Watchlist</span>
             </button>
-            <button className={classes.reviewBtn}>
+            <button onClick={showModal} className={classes.reviewBtn}>
               <MdRateReview />
               <span>Add Review</span>
             </button>
@@ -51,6 +60,7 @@ function FilmDetail() {
           <p className={classes.plot}>" {film.Plot} "</p>
         </div>
       </div>
+      {isModalVisible && <Modal onClick={hideModal}></Modal>}
     </div>
   );
 }

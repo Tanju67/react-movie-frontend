@@ -1,0 +1,31 @@
+.modal {
+  width: 50%;
+  height: 25rem;
+  background-color: #111;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.modal span {
+  font-size: 3rem;
+  background-color: #222;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #fff;
+}
+
+.modal span:hover {
+  transform: rotate(180deg);
+}
