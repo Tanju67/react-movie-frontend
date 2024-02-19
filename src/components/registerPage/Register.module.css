@@ -1,10 +1,10 @@
-.loginPage {
+.registerPage {
   height: 100vh;
   padding: 4rem;
   color: #fff;
 }
 
-.loginBox {
+.registerBox {
   background-color: #222;
   width: 40rem;
   margin: 0 auto;
@@ -13,27 +13,27 @@
   text-align: center;
 }
 
-.loginForm {
+.registerForm {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.loginBox h2 {
+.registerBox h2 {
   margin-bottom: 1rem;
 }
 
-.loginBox p {
+.registerBox p {
   font-size: 1.2rem;
   text-align: start;
 }
 
-.loginBox p a {
+.registerBox p a {
   text-decoration: underline;
   margin-left: 3px;
 }
 
-.loginBox button {
+.registerBox button {
   margin: 1rem 0;
 }

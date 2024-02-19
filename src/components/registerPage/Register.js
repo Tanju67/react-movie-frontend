@@ -1,13 +1,18 @@
 import React from "react";
-import classes from "./Login.module.css";
-import Input from "../../shared/formElemets/Input";
+import classes from "./Register.module.css";
 import { useForm } from "../../shared/hooks/form-hook";
-import { VALIDATOR_EMAIL, VALIDATOR_MINLENGTH } from "../../utils/validators";
+import Input from "../../shared/formElemets/Input";
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE,
+} from "../../utils/validators";
 import Button from "../../shared/UIElements/Button/Button";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Register() {
   const [inputHandler, formState] = useForm({
+    name: { value: "", isValid: false },
     email: { value: "", isValid: false },
     password: { value: "", isValid: false },
     isValid: false,
@@ -18,11 +23,21 @@ function Login() {
   };
 
   return (
-    <div className={classes.loginPage}>
-      <div className={classes.loginBox}>
-        <h2>Login</h2>
+    <div className={classes.registerPage}>
+      <div className={classes.registerBox}>
+        <h2>Register</h2>
 
-        <form onSubmit={submithandler} className={classes.loginForm}>
+        <form onSubmit={submithandler} className={classes.registerForm}>
+          <Input
+            id="name"
+            element="input"
+            type="text"
+            label="Name"
+            placeholder="Name"
+            errorMsg="Please enter a name!"
+            onInput={inputHandler}
+            validators={[VALIDATOR_REQUIRE()]}
+          />
           <Input
             id="email"
             element="input"
@@ -48,11 +63,11 @@ function Login() {
           </Button>
         </form>
         <p>
-          Doesn't have an account yet?<Link to={"/register"}>Register</Link>
+          Do you have already an account?<Link to={"/login"}>Login</Link>
         </p>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;

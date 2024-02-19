@@ -1,0 +1,27 @@
+.formControl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: start;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.formControl input {
+  padding: 1rem;
+  outline: none;
+  background-color: #fff;
+  border: none;
+}
+
+.invalid input {
+  background-color: salmon;
+}
+
+.invalid label {
+  color: salmon;
+}
+
+.error {
+  color: salmon;
+}

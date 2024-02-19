@@ -5,6 +5,7 @@ import WatchlistPage from "./pages/WatchlistPage";
 import FilmDetailPage from "./pages/FilmDetailPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/watchlist" element={<WatchlistPage />} />
         <Route path="/films/:id" element={<SearchResultPage />} />
         <Route path="/:id" element={<FilmDetailPage />} />
