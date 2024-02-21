@@ -15,7 +15,7 @@ function SearchResult() {
 
   return (
     <div className={classes.search}>
-      <FilmsList filmList={allMovies} />
+      <FilmsList filmList={allMovies} searchQuery={searchQuery} />
     </div>
   );
 }

@@ -1,0 +1,46 @@
+.sideMenu {
+  position: absolute;
+  height: 90vh;
+  width: 0;
+  background-color: #111;
+  top: 10vh;
+  left: 0;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 1rem;
+  padding-top: 4rem;
+  z-index: 1000;
+}
+
+.sideMenu li {
+  background-color: #fff;
+  padding: 0.5rem 1.5rem;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border-radius: 0.5rem 0 0 0;
+  transition: all 0.5s;
+  transition-delay: 0.4s;
+}
+
+.sideMenu a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #000;
+}
+
+.open {
+  width: 23rem;
+  opacity: 1;
+}
+
+.open li {
+  width: 80%;
+  height: 3.5rem;
+  opacity: 1;
+}

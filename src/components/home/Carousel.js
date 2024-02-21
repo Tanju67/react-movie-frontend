@@ -6,7 +6,7 @@ import film3 from "../../assets/back-to-the-future-lloyd-michael-j-fox.jpeg";
 import film4 from "../../assets/The-Godfather.webp";
 import { carouselFilmData } from "../../data/filmData";
 import useInterval from "../../shared/hooks/useInterval";
-import { NavLink } from "react-router-dom";
+import CarouselItem from "./CarouselItem";
 
 const filmList = [film1, film2, film3, film4];
 
@@ -29,9 +29,9 @@ function Carousel() {
     }
   };
 
-  // useInterval(() => {
-  //   nextSlide();
-  // }, 5000);
+  useInterval(() => {
+    nextSlide();
+  }, 5000);
 
   return (
     <div className={classes.carousel}>
@@ -44,28 +44,12 @@ function Carousel() {
         </div>
 
         {filmList.map((img, i) => (
-          <div
-            key={i}
-            className={`${classes.slide} ${
-              slideIndex === i && classes.activeSlide
-            } ${slideIndex - i === 1 && classes.prevSlide} ${
-              slideIndex - i === -3 && classes.prevSlide
-            }`}
-          >
-            <img className={classes.slideImg} src={img} alt="film scene" />
-            <div className={`${classes.filmInfo}`}>
-              <div className={classes.poster}>
-                <img src={carouselFilmData[i].Poster} alt="poster" />
-              </div>
-              <NavLink
-                to={`/${carouselFilmData[i].imdbID}`}
-                className={classes.info}
-              >
-                <h2>{carouselFilmData[i].Title}</h2>
-                <p>{carouselFilmData[i].Year}</p>
-              </NavLink>
-            </div>
-          </div>
+          <CarouselItem
+            slideIndex={slideIndex}
+            img={img}
+            itemIndex={i}
+            film={carouselFilmData[i]}
+          />
         ))}
       </div>
     </div>

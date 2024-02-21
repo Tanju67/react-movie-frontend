@@ -5,7 +5,7 @@ import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";
 
 function TopTen() {
   return (
-    <div className={classes.topten}>
+    <div id="top10" className={classes.topten}>
       <FilmsCarousel
         filmList={topTen}
         mainTitle={"What to watch"}

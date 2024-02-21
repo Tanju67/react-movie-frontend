@@ -6,7 +6,7 @@ import { generateRandomArray } from "../../utils/util";
 
 function SuggestionFilm() {
   return (
-    <div className={classes.suggest}>
+    <div id="suggestions" className={classes.suggest}>
       <FilmsCarousel
         filmList={generateRandomArray(10, films.length, films)}
         subTitle={"Our Suggestions"}

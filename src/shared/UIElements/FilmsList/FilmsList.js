@@ -5,8 +5,8 @@ import { FaAngleRight } from "react-icons/fa6";
 import { OMDbApiContext } from "../../context/omdbApi-context";
 import { NavLink } from "react-router-dom";
 
-function FilmsList({ filmList }) {
-  const { page, totalResults, setPage } = useContext(OMDbApiContext);
+function FilmsList({ filmList, searchQuery }) {
+  const { page, totalResults, setPage, query } = useContext(OMDbApiContext);
   const totalPage = Math.ceil(totalResults / 10);
 
   const increasePageHandler = () => {
@@ -43,6 +43,8 @@ function FilmsList({ filmList }) {
             </NavLink>
           </div>
         ))}
+
+        {filmList.length === 0 && <p>No films found for "{searchQuery}"</p>}
       </div>
     </div>
   );
