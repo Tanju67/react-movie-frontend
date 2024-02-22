@@ -37,21 +37,27 @@ function FilmDetail() {
           <img src={film.Poster} alt={film.Title} />
         </div>
         <div className={classes.description}>
-          <h2>{film.Title}</h2>
-          <p className={classes.shortInfo}>
-            <span>
-              📆{film.Year} | ⌛{film.Runtime} | ⭐{film.imdbRating}
-            </span>
-          </p>
-
-          <p className={classes.actors}>
-            <span>Actors</span>
-            <span>{film.Actors}</span>
-          </p>
-          <p className={classes.genre}>
-            <span>Genre</span>
-            <span> {film?.Genre}</span>
-          </p>
+          <div className={classes.descriptionHeader}>
+            <div className={classes.posterSmall}>
+              <img src={film.Poster} alt={film.Title} />
+            </div>
+            <div>
+              <h2>{film.Title}</h2>
+              <p className={classes.shortInfo}>
+                <span>
+                  📆{film.Year} | ⌛{film.Runtime} | ⭐{film.imdbRating}
+                </span>
+              </p>
+              <p className={classes.actors}>
+                <span>Actors</span>
+                <span>{film.Actors}</span>
+              </p>
+              <p className={classes.genre}>
+                <span>Genre</span>
+                <span> {film?.Genre}</span>
+              </p>
+            </div>
+          </div>
 
           <div className={classes.btnBox}>
             <button onClick={showWatchModal} className={classes.watchBtn}>

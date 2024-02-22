@@ -13,7 +13,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 .poster {
-  background-color: chartreuse;
   flex: 2;
 }
 .poster img {
@@ -27,9 +26,6 @@
   flex: 3;
 
   position: relative;
-}
-.description h2 {
-  /* margin-bottom: 1rem; */
 }
 
 .shortInfo {
@@ -148,4 +144,47 @@ hr {
   flex-direction: column;
   gap: 1rem;
   margin-top: 2rem;
+}
+.posterSmall {
+  display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .film {
+    max-width: 80%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .film {
+    max-width: 90%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .detail {
+    color: #aaa;
+    padding: 2rem 0;
+  }
+  .film {
+    max-width: 95%;
+    flex-direction: column;
+    position: relative;
+  }
+  .poster {
+    display: none;
+  }
+
+  .descriptionHeader {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .posterSmall {
+    display: block;
+    height: 19rem;
+  }
+  .posterSmall img {
+    height: 19rem;
+  }
 }
