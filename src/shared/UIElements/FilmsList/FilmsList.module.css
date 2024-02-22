@@ -85,10 +85,10 @@
 
   .poster {
     flex: 1;
-    height: auto;
+    height: 35rem;
   }
   .poster img {
     width: 100%;
-    height: auto;
+    height: 35rem;
   }
 }

@@ -29,7 +29,7 @@ function SideBar({ isSidebarOpen, setIsSidebarOpen }) {
         </a>
       </li>
       <li>
-        <NavLink to={"/blog-reviews"}>
+        <NavLink to={"/reviews"}>
           <MdRateReview />
           <span>Reviews Blog</span>
         </NavLink>

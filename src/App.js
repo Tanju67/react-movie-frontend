@@ -6,6 +6,7 @@ import FilmDetailPage from "./pages/FilmDetailPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ReviewsPage from "./pages/ReviewsPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <MainNavigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/watchlist" element={<WatchlistPage />} />

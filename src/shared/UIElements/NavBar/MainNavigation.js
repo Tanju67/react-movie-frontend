@@ -94,7 +94,7 @@ function MainNavigation() {
       </div>
 
       <div className={`${classes.box} ${classes.watchlist}`}>
-        <NavLink to={"/blog-reviews"}>
+        <NavLink to={"/reviews"}>
           <MdRateReview />
           <span>Reviews Blog</span>
         </NavLink>

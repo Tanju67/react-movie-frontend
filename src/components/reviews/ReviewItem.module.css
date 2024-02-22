@@ -1,0 +1,49 @@
+.reviewItem {
+  display: flex;
+  background-color: #222;
+  padding: 2rem;
+  gap: 2rem;
+  width: 80%;
+  margin: 1rem auto;
+  color: #999;
+}
+.posterBox {
+  height: 20rem;
+}
+.posterBox img {
+  height: 100%;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.rate {
+  font-weight: bold;
+}
+
+.reviewItem h2 {
+  color: rgb(18, 125, 4);
+}
+
+.showMore {
+  font-style: italic;
+  border-bottom: 1px solid salmon;
+  padding: 2px;
+  font-size: 1.4rem;
+  color: salmon;
+}
+
+@media only screen and (max-width: 850px) {
+  .reviewItem {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .reviewItem {
+    width: 95%;
+  }
+}

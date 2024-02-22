@@ -6,7 +6,7 @@
 
 .loginBox {
   background-color: #222;
-  width: 40rem;
+  width: 50rem;
   margin: 0 auto;
   padding: 2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 5);
@@ -36,4 +36,10 @@
 
 .loginBox button {
   margin: 1rem 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .loginBox {
+    width: 100%;
+  }
 }
