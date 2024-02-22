@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./TopTen.module.css";
 import { topTen } from "../../data/filmData";
 import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";

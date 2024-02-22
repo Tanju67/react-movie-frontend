@@ -43,7 +43,7 @@
 }
 
 .item {
-  width: 18%;
+  width: 22rem;
   height: 42rem;
 
   display: flex;
@@ -63,4 +63,32 @@
   background-color: #222;
   flex: 1;
   padding: 1rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .item {
+    width: 23%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .item {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .item {
+    width: 45%;
+    height: auto;
+  }
+
+  .poster {
+    flex: 1;
+    height: auto;
+  }
+  .poster img {
+    width: 100%;
+    height: auto;
+  }
 }
