@@ -6,7 +6,8 @@ import { OMDbApiContext } from "../../context/omdbApi-context";
 import { NavLink } from "react-router-dom";
 
 function FilmsList({ filmList, searchQuery }) {
-  const { page, totalResults, setPage, query } = useContext(OMDbApiContext);
+  const { page, totalResults, setPage, isLoading, error } =
+    useContext(OMDbApiContext);
   const totalPage = Math.ceil(totalResults / 10);
 
   const increasePageHandler = () => {
@@ -33,7 +34,10 @@ function FilmsList({ filmList, searchQuery }) {
         {filmList.map((item, i) => (
           <div key={item?.imdbID} className={classes.item}>
             <div className={classes.poster}>
-              <img src={item?.Poster} alt="poster" />
+              {item.Poster !== "N/A" && <img src={item?.Poster} alt="poster" />}
+              {item.Poster === "N/A" && (
+                <p className={classes.noPoster}>No poster found.</p>
+              )}
             </div>
             <NavLink to={`/${item.imdbID}`} className={classes.info}>
               <h4>

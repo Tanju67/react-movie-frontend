@@ -3,18 +3,18 @@ import { useHttpRequest } from "../hooks/fetchData-hook";
 
 export const OMDbApiContext = createContext({
   query: "",
-  storage: "",
   page: 1,
   movies: [],
   film: {},
   totalResults: 0,
   allMovies: [],
+  isLoading: false,
+  error: null,
   setQuery: () => {},
   setPage: () => {},
   setMovies: () => {},
   setFilm: () => {},
   setTotalResults: () => {},
-  setStorage: () => {},
   fetchFilmData: () => {},
   setAllMovies: () => {},
   fetchAllMovies: () => {},
@@ -24,7 +24,6 @@ export const OMDbApiContext = createContext({
 const KEY = "a36111d7";
 export const Provider = (props) => {
   const [query, setQuery] = useState("");
-  const [storage, setStorage] = useState("");
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [film, setFilm] = useState({});
@@ -80,18 +79,18 @@ export const Provider = (props) => {
     <OMDbApiContext.Provider
       value={{
         query,
-        storage,
         page,
         movies,
         film,
         allMovies,
         totalResults,
+        isLoading,
+        error,
         setQuery,
         setPage,
         setMovies,
         setTotalResults,
         setAllMovies,
-        setStorage,
         setFilm,
         fetchFilmData,
         fetchAllMovies,

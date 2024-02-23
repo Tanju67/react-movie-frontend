@@ -27,6 +27,7 @@ export const useHttpRequest = () => {
 
         setIsLoading(false);
         callback(data);
+        setError(null);
         return data;
       } catch (error) {
         setError(error.message);

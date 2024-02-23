@@ -19,12 +19,12 @@ function SideBar({ isSidebarOpen, setIsSidebarOpen }) {
         </a>
       </li>
       <li>
-        <a href={"#suggestions"}>
+        <a href={"/#suggestions"}>
           <MdRecommend /> <span>Our Suggestions</span>
         </a>
       </li>
       <li>
-        <a href={"#tvshows"}>
+        <a href={"/#tvshows"}>
           <IoFilm /> <span>Top 10 TV Shows</span>
         </a>
       </li>

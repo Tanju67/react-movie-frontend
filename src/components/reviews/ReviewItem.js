@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import classes from "./ReviewItem.module.css";
+import { Link } from "react-router-dom";
 
-function ReviewItem({ poster, title, review }) {
+function ReviewItem({ poster, title, review, imdbID }) {
   const [readMore, setReadMore] = useState(false);
   const [screenWidth, setScreenWidtth] = useState(window.innerWidth);
   const { innerWidth } = window;
@@ -31,7 +32,9 @@ function ReviewItem({ poster, title, review }) {
             ⭐His Rating: <span className={classes.rate}>9</span>/10
           </p>
         </div>
-        <h2>{title}</h2>
+        <Link to={`/${imdbID}`}>
+          <h2>{title}</h2>
+        </Link>
         <p>
           {readMore
             ? review

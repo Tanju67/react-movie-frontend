@@ -3,11 +3,13 @@ import classes from "./SearchResult.module.css";
 import FilmsList from "../../shared/UIElements/FilmsList/FilmsList";
 import { OMDbApiContext } from "../../shared/context/omdbApi-context";
 import { useParams } from "react-router-dom";
+import { Watch } from "react-loader-spinner";
 
 function SearchResult() {
   const searchQuery = useParams().id;
   console.log(searchQuery);
-  const { fetchAllMovies, allMovies, page } = useContext(OMDbApiContext);
+  const { fetchAllMovies, allMovies, page, isLoading, error } =
+    useContext(OMDbApiContext);
 
   useEffect(() => {
     fetchAllMovies(page, searchQuery);
@@ -15,7 +17,22 @@ function SearchResult() {
 
   return (
     <div className={classes.search}>
-      <FilmsList filmList={allMovies} searchQuery={searchQuery} />
+      {error && <p className={classes.error}>⛔Something went wrong</p>}
+      {!error && (
+        <Watch
+          visible={isLoading}
+          height="50"
+          width="50"
+          radius="48"
+          color="#4fa94d"
+          ariaLabel="watch-loading"
+          wrapperStyle={{}}
+          wrapperClass={classes.spinner}
+        />
+      )}
+      {!isLoading && !error && (
+        <FilmsList filmList={allMovies} searchQuery={searchQuery} />
+      )}
     </div>
   );
 }

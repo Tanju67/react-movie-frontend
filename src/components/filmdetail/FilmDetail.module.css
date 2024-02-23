@@ -11,6 +11,7 @@
   background-color: #222;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 .poster {
   flex: 2;
@@ -19,6 +20,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.noPoster {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #000;
 }
 .description {
   background-color: #111;
@@ -147,6 +157,14 @@ hr {
 }
 .posterSmall {
   display: none;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
 }
 
 @media only screen and (max-width: 1000px) {

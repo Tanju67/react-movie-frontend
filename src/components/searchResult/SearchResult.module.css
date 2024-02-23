@@ -1,0 +1,14 @@
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error {
+  background-color: #222;
+  color: #fff;
+  width: 30rem;
+  text-align: center;
+  margin: 3rem auto;
+}
