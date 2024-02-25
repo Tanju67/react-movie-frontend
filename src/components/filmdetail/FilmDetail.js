@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import classes from "./FilmDetail.module.css";
 import { MdBookmarkAdd } from "react-icons/md";
 import { MdRateReview } from "react-icons/md";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { OMDbApiContext } from "../../shared/context/omdbApi-context";
 import Modal from "../../shared/UIElements/Modal/Modal";
 import StarRating from "../../shared/UIElements/StarRaiting/StarRaiting";
 import Button from "../../shared/UIElements/Button/Button";
 import { Watch } from "react-loader-spinner";
+import { AuthContext } from "../../shared/context/auth-context";
+import { ServerAPIContext } from "../../shared/context/serverApi-context";
 
 function FilmDetail() {
   const { film, fetchDetailMovie, isLoading, error } =
@@ -15,18 +17,91 @@ function FilmDetail() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isWatchModalVisible, setIsWatchModalVisible] = useState(false);
   const filmId = useParams().id;
+  const { sendToServerRequest, filmList } = useContext(ServerAPIContext);
+
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
+  const [rating, setRating] = useState(0);
+  const [alreadyWatchlist, setAlreadyWatchlist] = useState(
+    filmList.filter((film) => film.imdbID === filmId)
+  );
+  const [inputReview, setInputReview] = useState("");
 
   const showModal = () => {
+    if (!isLoggedIn) {
+      return navigate("/login");
+    }
     setIsModalVisible(true);
   };
 
   const showWatchModal = () => {
+    if (!isLoggedIn) {
+      return navigate("/login");
+    }
     setIsWatchModalVisible(true);
   };
 
   const hideModal = () => {
     setIsModalVisible(false);
   };
+
+  const watchlistSubmitHandler = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    sendToServerRequest(
+      "movie",
+      "POST",
+      {
+        Title: film.Title,
+        Year: film.Year,
+        imdbID: film.imdbID,
+        Poster: film.Poster,
+        UserRating: rating,
+      },
+      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      () => {
+        navigate("/watchlist");
+      }
+    );
+  };
+
+  const removeWatchlistHandler = () => {
+    console.log(film);
+    const token = localStorage.getItem("token");
+    sendToServerRequest(
+      `movie/${filmId}`,
+      "DELETE",
+      undefined,
+      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      () => {
+        navigate("/watchlist");
+      }
+    );
+  };
+
+  const reviewSubmitHandler = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    sendToServerRequest(
+      "review",
+      "POST",
+      {
+        Title: film.Title,
+        Review: inputReview,
+        imdbID: film.imdbID,
+        Poster: film.Poster,
+        UserRating: rating,
+      },
+      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      () => {
+        navigate("/reviews");
+      }
+    );
+  };
+
+  useEffect(() => {
+    setAlreadyWatchlist(filmList.filter((film) => film.imdbID === filmId));
+  }, [filmList, setAlreadyWatchlist, filmId]);
 
   useEffect(() => {
     fetchDetailMovie(filmId);
@@ -64,7 +139,10 @@ function FilmDetail() {
                 <h2>{film.Title}</h2>
                 <p className={classes.shortInfo}>
                   <span>
-                    📆{film.Year} | ⌛{film.Runtime} | ⭐{film.imdbRating}
+                    📆{film.Year} | ⌛{film.Runtime} | IMDb:⭐{film.imdbRating}{" "}
+                    {alreadyWatchlist.length > 0
+                      ? `| Your Rating :⭐${alreadyWatchlist[0].UserRating}`
+                      : ""}
                   </span>
                 </p>
                 <p className={classes.actors}>
@@ -79,10 +157,21 @@ function FilmDetail() {
             </div>
 
             <div className={classes.btnBox}>
-              <button onClick={showWatchModal} className={classes.watchBtn}>
-                <MdBookmarkAdd />
-                <span>Watchlist</span>
-              </button>
+              {alreadyWatchlist.length === 0 && (
+                <button onClick={showWatchModal} className={classes.watchBtn}>
+                  <MdBookmarkAdd />
+                  <span>Watchlist</span>
+                </button>
+              )}
+              {alreadyWatchlist.length > 0 && (
+                <button
+                  onClick={removeWatchlistHandler}
+                  className={classes.watchBtn}
+                >
+                  <MdBookmarkAdd />
+                  <span>Remove from Watchlist</span>
+                </button>
+              )}
               <button onClick={showModal} className={classes.reviewBtn}>
                 <MdRateReview />
                 <span>Add Review</span>
@@ -96,34 +185,62 @@ function FilmDetail() {
       )}
       {isModalVisible && (
         <Modal onClick={hideModal}>
-          <form className={classes.reviewForm}>
+          <form onSubmit={reviewSubmitHandler} className={classes.reviewForm}>
             <div className={classes.desc}>
               <h2>{film.Title}</h2>
               <div className={classes.ratingBox}>
-                <StarRating maxRating={10} size={20} onSetRating={null} />
+                <StarRating
+                  defaultRating={rating}
+                  maxRating={10}
+                  size={20}
+                  onSetRating={(rating) => setRating(rating)}
+                />
               </div>
             </div>
             <div className={classes.formControl}>
-              <textarea placeholder="Write your review..." />
+              <textarea
+                value={inputReview}
+                onChange={(e) => setInputReview(e.target.value)}
+                placeholder="Write your review..."
+              />
             </div>
-            <Button>Share Your Review</Button>
+            <Button
+              type="submit"
+              className={
+                rating === 0 || inputReview.length < 50 ? classes.disabled : ""
+              }
+              disabled={rating === 0 || inputReview.length < 50}
+            >
+              Share Your Review
+            </Button>
           </form>
         </Modal>
       )}
 
       {isWatchModalVisible && (
-        <Modal
-          onClose={() => setIsWatchModalVisible(false)}
-          onClick={() => setIsWatchModalVisible(false)}
-        >
+        <Modal onClick={() => setIsWatchModalVisible(false)}>
           <div className={classes.addWatchlist}>
-            <form className={classes.watchlistForm}>
+            <form
+              onSubmit={watchlistSubmitHandler}
+              className={classes.watchlistForm}
+            >
               <p className={classes.star}>⭐</p>
               <p>Rate This</p>
               <p>{film.Title}</p>
               <div className={classes.rating}>
-                <StarRating maxRating={10} size={20} onSetRating={null} />
-                <Button>Add Watchlist</Button>
+                <StarRating
+                  maxRating={10}
+                  defaultRating={rating}
+                  size={20}
+                  onSetRating={(rating) => setRating(rating)}
+                />
+                <Button
+                  className={rating === 0 ? classes.disabled : ""}
+                  disabled={rating === 0}
+                  type="submit"
+                >
+                  Add Watchlist
+                </Button>
               </div>
             </form>
           </div>

@@ -1,11 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import classes from "./ReviewItem.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../shared/context/auth-context";
+import Button from "../../shared/UIElements/Button/Button";
+import { ServerAPIContext } from "../../shared/context/serverApi-context";
 
-function ReviewItem({ poster, title, review, imdbID }) {
+function ReviewItem({
+  poster,
+  title,
+  review,
+  imdbID,
+  name,
+  date,
+  createdBy,
+  userRating,
+  reviewId,
+}) {
   const [readMore, setReadMore] = useState(false);
   const [screenWidth, setScreenWidtth] = useState(window.innerWidth);
-  const { innerWidth } = window;
+  const { user } = useContext(AuthContext);
+  const { sendToServerRequest } = useContext(ServerAPIContext);
+  const navigate = useNavigate();
+
+  const deleteReviewHandler = () => {
+    const token = localStorage.getItem("token");
+    sendToServerRequest(
+      `review/${reviewId}`,
+      "DELETE",
+      undefined,
+      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      () => {
+        navigate("/");
+      }
+    );
+  };
   useEffect(() => {
     const handleResize = () => {
       setScreenWidtth(window.innerWidth);
@@ -25,21 +53,24 @@ function ReviewItem({ poster, title, review, imdbID }) {
       <div className={classes.reviewDesc}>
         <div className={classes.info}>
           <p>
-            Written by <span className={classes.name}>Tanju</span> at{" "}
-            <span className={classes.date}>22/02/2024</span>
+            Written by <span className={classes.name}>{name}</span> at{" "}
+            <span className={classes.date}>
+              {new Date(date).toLocaleDateString("de-DE", {})}
+            </span>
           </p>
           <p>
-            ⭐His Rating: <span className={classes.rate}>9</span>/10
+            ⭐His Rating: <span className={classes.rate}>{userRating}</span>/10
           </p>
         </div>
         <Link to={`/${imdbID}`}>
           <h2>{title}</h2>
         </Link>
-        <p>
+        <p className={classes.reviewText}>
           {readMore
             ? review
             : review.substring(0, Math.trunc(screenWidth / 4)) + "..."}{" "}
         </p>
+
         <span
           onClick={() => setReadMore((prev) => !prev)}
           className={classes.showMore}
@@ -47,6 +78,11 @@ function ReviewItem({ poster, title, review, imdbID }) {
           {readMore ? <em> &uarr; show less</em> : <em> &darr; show more</em>}
         </span>
       </div>
+      {createdBy === user.id && (
+        <Button onClick={deleteReviewHandler} className={classes.deleteBtn}>
+          Delete Your Review
+        </Button>
+      )}
     </div>
   );
 }

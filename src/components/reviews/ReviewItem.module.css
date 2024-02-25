@@ -6,12 +6,16 @@
   width: 80%;
   margin: 1rem auto;
   color: #aaa;
+  position: relative;
 }
 .posterBox {
   height: 20rem;
 }
 .posterBox img {
   height: 100%;
+}
+.reviewDesc {
+  width: 100%;
 }
 
 .info {
@@ -38,6 +42,17 @@
   padding: 2px;
   font-size: 1.4rem;
   color: salmon;
+}
+
+.deleteBtn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.4rem;
+}
+
+.reviewText {
+  word-break: break-all;
 }
 
 @media only screen and (max-width: 850px) {

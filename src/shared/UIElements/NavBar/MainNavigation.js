@@ -10,6 +10,7 @@ import { MdRateReview } from "react-icons/md";
 import DropdownSearch from "./DropdownSearch";
 import { OMDbApiContext } from "../../context/omdbApi-context";
 import SideBar from "./SideBar";
+import { AuthContext } from "../../context/auth-context";
 
 function MainNavigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -17,6 +18,7 @@ function MainNavigation() {
   const { query, setMovies, fetchFilmData, setQuery, movies, totalResults } =
     useContext(OMDbApiContext);
   const navigate = useNavigate();
+  const { isLoggedIn, onLogout } = useContext(AuthContext);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((isOpen) => !isOpen);
@@ -106,12 +108,27 @@ function MainNavigation() {
           <span>Watchlist</span>
         </NavLink>
       </div>
-      <div className={`${classes.box} ${classes.loginBox}`}>
-        <NavLink to={"/login"}>
-          <IoLogInOutline />
-          <span>Login</span>
-        </NavLink>
-      </div>
+      {!isLoggedIn && (
+        <div className={`${classes.box} ${classes.loginBox}`}>
+          <NavLink to={"/login"}>
+            <IoLogInOutline />
+            <span>Login</span>
+          </NavLink>
+        </div>
+      )}
+      {isLoggedIn && (
+        <div
+          onClick={() => {
+            onLogout();
+          }}
+          className={`${classes.box} ${classes.loginBox}`}
+        >
+          <NavLink to={"/login"}>
+            <IoLogInOutline />
+            <span>Logout</span>
+          </NavLink>
+        </div>
+      )}
 
       <SideBar
         isSidebarOpen={isSidebarOpen}

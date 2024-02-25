@@ -1,27 +1,40 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./WatchList.module.css";
 import { MdBookmarkAdd } from "react-icons/md";
 import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";
 import { films } from "../../data/filmData";
 import { generateRandomArray } from "../../utils/util";
+import { AuthContext } from "../../shared/context/auth-context";
+import { Link } from "react-router-dom";
+import { ServerAPIContext } from "../../shared/context/serverApi-context";
 
 function WatchList() {
-  const login = false;
+  const { isLoggedIn } = useContext(AuthContext);
+  const { filmList } = useContext(ServerAPIContext);
   return (
     <div className={classes.watchlist}>
-      {!login && (
+      {!isLoggedIn && (
         <div className={classes.notSignIn}>
           <h2> Your Watchlist </h2>
           <MdBookmarkAdd />
           <p>Login to access your Watchlist</p>
           <p>Save shows and movies to keep track of what you want to watch.</p>
-          <button>Login</button>
+          <Link to={"/login"}>
+            <button>Login</button>
+          </Link>
         </div>
       )}
-      {login && (
+      {isLoggedIn && filmList.length === 0 && (
+        <div className={classes.notSignIn}>
+          <h2> Your Watchlist </h2>
+          <MdBookmarkAdd />
+          <p>Add your favorite films to your Watchlist</p>
+        </div>
+      )}
+      {isLoggedIn && filmList.length !== 0 && (
         <div className={classes.signIn}>
           <FilmsCarousel
-            filmList={generateRandomArray(10, films.length, films)}
+            filmList={filmList}
             subTitle={"From Your Watchlist >"}
           />
         </div>

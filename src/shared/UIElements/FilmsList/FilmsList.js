@@ -5,7 +5,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { OMDbApiContext } from "../../context/omdbApi-context";
 import { NavLink } from "react-router-dom";
 
-function FilmsList({ filmList, searchQuery }) {
+function FilmsList({ filmList, searchQuery, watch }) {
   const { page, totalResults, setPage, isLoading, error } =
     useContext(OMDbApiContext);
   const totalPage = Math.ceil(totalResults / 10);
@@ -44,11 +44,20 @@ function FilmsList({ filmList, searchQuery }) {
                 {i + 1}.{item?.Title}
               </h4>
               <p>{item?.Year}</p>
+              <p>
+                {item?.UserRating ? `Your Rating: ⭐${item.UserRating}` : ""}
+              </p>
             </NavLink>
           </div>
         ))}
 
-        {filmList.length === 0 && <p>No films found for "{searchQuery}"</p>}
+        {filmList.length === 0 && !watch && (
+          <p>No films found for "{searchQuery}"</p>
+        )}
+
+        {filmList.length === 0 && (
+          <p>There is not any film on your watchlist yet.</p>
+        )}
       </div>
     </div>
   );

@@ -60,11 +60,11 @@ function FilmsCarousel({ filmList, mainTitle, subTitle }) {
         className={`${classes.toptenCarousel} `}
       >
         {filmList.map((item, i) => (
-          <div key={item?.imdbID} className={classes.item}>
+          <div key={i} className={classes.item}>
             <div className={classes.poster}>
               <img src={item?.Poster} alt="poster" />
             </div>
-            <NavLink to={`/${item.imdbID}`} className={classes.info}>
+            <NavLink to={`/${item?.imdbID}`} className={classes.info}>
               <h4>
                 {i + 1}.{item?.Title}
               </h4>

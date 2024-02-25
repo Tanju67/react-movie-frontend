@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Register.module.css";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/formElemets/Input";
@@ -8,7 +8,8 @@ import {
   VALIDATOR_REQUIRE,
 } from "../../utils/validators";
 import Button from "../../shared/UIElements/Button/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../shared/context/auth-context";
 
 function Register() {
   const [inputHandler, formState] = useForm({
@@ -17,9 +18,23 @@ function Register() {
     password: { value: "", isValid: false },
     isValid: false,
   });
+  const navigate = useNavigate();
+  const { sendAuthRequest } = useContext(AuthContext);
 
   const submithandler = async (e) => {
     e.preventDefault();
+    sendAuthRequest(
+      "register",
+      {
+        name: formState.name.value,
+        email: formState.email.value,
+        password: formState.password.value,
+      },
+      { "Content-Type": "application/json" },
+      () => {
+        navigate("/login");
+      }
+    );
   };
 
   return (

@@ -26,29 +26,28 @@ function DropdownSearch({ movies, query }) {
             wrapperClass={classes.spinner}
           />
         )}
+
         {!isLoading &&
           !error &&
           movies?.map((item, i) => (
-            <>
-              <div key={item.imdbID} id={item.imdbID} className={classes.film}>
-                <div className={classes.poster}>
-                  {item.Poster !== "N/A" && (
-                    <img src={item?.Poster} alt="poster" />
-                  )}
-                  {item.Poster === "N/A" && (
-                    <p className={classes.noPoster}>No poster found.</p>
-                  )}
-                </div>
-                <NavLink
-                  onClick={clickHandler}
-                  to={`/${item?.imdbID}`}
-                  className={classes.description}
-                >
-                  <h4>{item?.Title}</h4>
-                  <p>{item?.Year}</p>
-                </NavLink>
+            <div key={item.imdbID} id={item.imdbID} className={classes.film}>
+              <div className={classes.poster}>
+                {item.Poster !== "N/A" && (
+                  <img src={item?.Poster} alt="poster" />
+                )}
+                {item.Poster === "N/A" && (
+                  <p className={classes.noPoster}>No poster found.</p>
+                )}
               </div>
-            </>
+              <NavLink
+                onClick={clickHandler}
+                to={`/${item?.imdbID}`}
+                className={classes.description}
+              >
+                <h4>{item?.Title}</h4>
+                <p>{item?.Year}</p>
+              </NavLink>
+            </div>
           ))}
         {!error && (
           <NavLink

@@ -159,6 +159,14 @@ hr {
   display: none;
 }
 
+.watchlistForm .disabled:disabled,
+.watchlistForm .disabled:hover:disabled,
+.reviewForm .disabled:disabled,
+.reviewForm .disabled:hover:disabled {
+  background-color: #666;
+  color: #fff;
+}
+
 .spinner {
   position: absolute;
   top: 50%;

@@ -32,7 +32,6 @@ export const Provider = (props) => {
   const { isLoading, error, sendRequest, clearErrorHandler } = useHttpRequest();
 
   const fetchFilmData = useCallback((controller, query) => {
-    localStorage.clear();
     sendRequest(
       `http://www.omdbapi.com/?s=${query}&apikey=${KEY}`,
       "GET",
@@ -41,7 +40,6 @@ export const Provider = (props) => {
       undefined,
       (data) => {
         setMovies(data.Search ? data.Search : []);
-        console.log(data);
       }
     );
   }, []);
@@ -56,7 +54,6 @@ export const Provider = (props) => {
       (data) => {
         setAllMovies(data.Search ? data.Search : []);
         setTotalResults(data.totalResults ? data.totalResults : 0);
-        console.log(data);
       }
     );
   }, []);
@@ -70,7 +67,6 @@ export const Provider = (props) => {
       undefined,
       (data) => {
         setFilm(data ? data : {});
-        console.log(data);
       }
     );
   }, []);

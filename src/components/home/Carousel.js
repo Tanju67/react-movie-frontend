@@ -45,6 +45,7 @@ function Carousel() {
 
         {filmList.map((img, i) => (
           <CarouselItem
+            key={i}
             slideIndex={slideIndex}
             img={img}
             itemIndex={i}
