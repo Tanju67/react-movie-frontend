@@ -1,0 +1,29 @@
+.reviewItem {
+  background-color: #222;
+  padding: 2rem;
+  margin: 1rem auto;
+  color: #aaa;
+  position: relative;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.reviewText {
+  font-size: 1.4rem;
+}
+
+.showMore {
+  font-style: italic;
+  border-bottom: 1px solid salmon;
+  padding: 2px;
+  font-size: 1.4rem;
+  color: salmon;
+
+  display: inline-block;
+  margin-top: 1rem;
+}

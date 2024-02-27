@@ -10,22 +10,32 @@ import Button from "../../shared/UIElements/Button/Button";
 import { Watch } from "react-loader-spinner";
 import { AuthContext } from "../../shared/context/auth-context";
 import { ServerAPIContext } from "../../shared/context/serverApi-context";
+import FilmReviews from "./FilmReviews";
 
 function FilmDetail() {
   const { film, fetchDetailMovie, isLoading, error } =
     useContext(OMDbApiContext);
+  const {
+    sendToServerRequest,
+    filmList,
+    createReview,
+    getUserReviews,
+    addMovieToWatchlist,
+    deleteMovieFromWatchlist,
+  } = useContext(ServerAPIContext);
+  const { isLoggedIn } = useContext(AuthContext);
+  const filmId = useParams().id;
+  const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isWatchModalVisible, setIsWatchModalVisible] = useState(false);
-  const filmId = useParams().id;
-  const { sendToServerRequest, filmList } = useContext(ServerAPIContext);
-
-  const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   const [alreadyWatchlist, setAlreadyWatchlist] = useState(
     filmList.filter((film) => film.imdbID === filmId)
   );
   const [inputReview, setInputReview] = useState("");
+  const [reviewFilmList, setReviewFilmList] = useState([]);
+  const [showMore, setShowMore] = useState(1);
+  const [totalReview, setTotalReview] = useState(0);
 
   const showModal = () => {
     if (!isLoggedIn) {
@@ -45,12 +55,16 @@ function FilmDetail() {
     setIsModalVisible(false);
   };
 
+  const index = Math.ceil(totalReview / 3);
+  const clickHandler = () => {
+    if (index === showMore) return;
+    setShowMore((prev) => prev + 1);
+  };
+
   const watchlistSubmitHandler = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-    sendToServerRequest(
-      "movie",
-      "POST",
+
+    addMovieToWatchlist(
       {
         Title: film.Title,
         Year: film.Year,
@@ -58,7 +72,6 @@ function FilmDetail() {
         Poster: film.Poster,
         UserRating: rating,
       },
-      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       () => {
         navigate("/watchlist");
       }
@@ -66,25 +79,14 @@ function FilmDetail() {
   };
 
   const removeWatchlistHandler = () => {
-    console.log(film);
-    const token = localStorage.getItem("token");
-    sendToServerRequest(
-      `movie/${filmId}`,
-      "DELETE",
-      undefined,
-      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      () => {
-        navigate("/watchlist");
-      }
-    );
+    deleteMovieFromWatchlist(filmId, () => {
+      navigate("/watchlist");
+    });
   };
 
   const reviewSubmitHandler = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-    sendToServerRequest(
-      "review",
-      "POST",
+    createReview(
       {
         Title: film.Title,
         Review: inputReview,
@@ -92,7 +94,6 @@ function FilmDetail() {
         Poster: film.Poster,
         UserRating: rating,
       },
-      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       () => {
         navigate("/reviews");
       }
@@ -106,6 +107,13 @@ function FilmDetail() {
   useEffect(() => {
     fetchDetailMovie(filmId);
   }, [fetchDetailMovie, filmId]);
+
+  useEffect(() => {
+    getUserReviews(filmId, showMore, (data) => {
+      setReviewFilmList(data.result);
+      setTotalReview(data.total);
+    });
+  }, [filmId, getUserReviews, showMore]);
 
   return (
     <div className={classes.detail}>
@@ -123,65 +131,78 @@ function FilmDetail() {
         />
       )}
       {!isLoading && !error && (
-        <div className={classes.film}>
-          <div className={classes.poster}>
-            {film.Poster !== "N/A" && <img src={film?.Poster} alt="poster" />}
-            {film.Poster === "N/A" && (
-              <p className={classes.noPoster}>No poster found.</p>
-            )}
-          </div>
-          <div className={classes.description}>
-            <div className={classes.descriptionHeader}>
-              <div className={classes.posterSmall}>
-                <img src={film.Poster} alt={film.Title} />
-              </div>
-              <div>
-                <h2>{film.Title}</h2>
-                <p className={classes.shortInfo}>
-                  <span>
-                    📆{film.Year} | ⌛{film.Runtime} | IMDb:⭐{film.imdbRating}{" "}
-                    {alreadyWatchlist.length > 0
-                      ? `| Your Rating :⭐${alreadyWatchlist[0].UserRating}`
-                      : ""}
-                  </span>
-                </p>
-                <p className={classes.actors}>
-                  <span>Actors</span>
-                  <span>{film.Actors}</span>
-                </p>
-                <p className={classes.genre}>
-                  <span>Genre</span>
-                  <span> {film?.Genre}</span>
-                </p>
-              </div>
-            </div>
-
-            <div className={classes.btnBox}>
-              {alreadyWatchlist.length === 0 && (
-                <button onClick={showWatchModal} className={classes.watchBtn}>
-                  <MdBookmarkAdd />
-                  <span>Watchlist</span>
-                </button>
+        <>
+          <div className={classes.film}>
+            <div className={classes.poster}>
+              {film.Poster !== "N/A" && <img src={film?.Poster} alt="poster" />}
+              {film.Poster === "N/A" && (
+                <p className={classes.noPoster}>No poster found.</p>
               )}
-              {alreadyWatchlist.length > 0 && (
-                <button
-                  onClick={removeWatchlistHandler}
-                  className={classes.watchBtn}
-                >
-                  <MdBookmarkAdd />
-                  <span>Remove from Watchlist</span>
-                </button>
-              )}
-              <button onClick={showModal} className={classes.reviewBtn}>
-                <MdRateReview />
-                <span>Add Review</span>
-              </button>
             </div>
-            <hr />
+            <div className={classes.description}>
+              <div className={classes.descriptionHeader}>
+                <div className={classes.posterSmall}>
+                  <img src={film.Poster} alt={film.Title} />
+                </div>
+                <div>
+                  <h2>{film.Title}</h2>
+                  <p className={classes.shortInfo}>
+                    <span>
+                      📆{film.Year} | ⌛{film.Runtime} | IMDb:⭐
+                      {film.imdbRating}{" "}
+                      {alreadyWatchlist.length > 0
+                        ? `| Your Rating :⭐${alreadyWatchlist[0].UserRating}`
+                        : ""}
+                    </span>
+                  </p>
+                  <p className={classes.actors}>
+                    <span>Actors</span>
+                    <span>{film.Actors}</span>
+                  </p>
+                  <p className={classes.genre}>
+                    <span>Genre</span>
+                    <span> {film?.Genre}</span>
+                  </p>
+                </div>
+              </div>
 
-            <p className={classes.plot}>" {film.Plot} "</p>
+              <div className={classes.btnBox}>
+                {isLoggedIn && alreadyWatchlist.length === 0 && (
+                  <button onClick={showWatchModal} className={classes.watchBtn}>
+                    <MdBookmarkAdd />
+                    <span>Watchlist</span>
+                  </button>
+                )}
+                {!isLoggedIn && (
+                  <button onClick={showWatchModal} className={classes.watchBtn}>
+                    <MdBookmarkAdd />
+                    <span>Watchlist</span>
+                  </button>
+                )}
+                {isLoggedIn && alreadyWatchlist.length > 0 && (
+                  <button
+                    onClick={removeWatchlistHandler}
+                    className={classes.watchBtn}
+                  >
+                    <MdBookmarkAdd />
+                    <span>Remove from Watchlist</span>
+                  </button>
+                )}
+                <button onClick={showModal} className={classes.reviewBtn}>
+                  <MdRateReview />
+                  <span>Add Review</span>
+                </button>
+              </div>
+              <hr />
+
+              <p className={classes.plot}>" {film.Plot} "</p>
+            </div>
           </div>
-        </div>
+          <FilmReviews
+            clickHandler={clickHandler}
+            reviewFilmList={reviewFilmList}
+          />
+        </>
       )}
       {isModalVisible && (
         <Modal onClick={hideModal}>

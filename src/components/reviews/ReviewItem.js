@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/UIElements/Button/Button";
 import { ServerAPIContext } from "../../shared/context/serverApi-context";
+import { OMDbApiContext } from "../../shared/context/omdbApi-context";
 
 function ReviewItem({
   poster,
@@ -18,21 +19,20 @@ function ReviewItem({
 }) {
   const [readMore, setReadMore] = useState(false);
   const [screenWidth, setScreenWidtth] = useState(window.innerWidth);
-  const { user } = useContext(AuthContext);
-  const { sendToServerRequest } = useContext(ServerAPIContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
+  const { getAllReviews, setReviewList, deleteReview } =
+    useContext(ServerAPIContext);
+  const { page, setTotalResults } = useContext(OMDbApiContext);
   const navigate = useNavigate();
 
   const deleteReviewHandler = () => {
-    const token = localStorage.getItem("token");
-    sendToServerRequest(
-      `review/${reviewId}`,
-      "DELETE",
-      undefined,
-      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      () => {
-        navigate("/");
-      }
-    );
+    deleteReview(reviewId, () => {
+      navigate("/reviews");
+      getAllReviews(page, (data) => {
+        setReviewList(data.result);
+        setTotalResults(data.total);
+      });
+    });
   };
   useEffect(() => {
     const handleResize = () => {
@@ -78,7 +78,7 @@ function ReviewItem({
           {readMore ? <em> &uarr; show less</em> : <em> &darr; show more</em>}
         </span>
       </div>
-      {createdBy === user.id && (
+      {isLoggedIn && createdBy === user.id && (
         <Button onClick={deleteReviewHandler} className={classes.deleteBtn}>
           Delete Your Review
         </Button>

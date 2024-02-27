@@ -3,28 +3,23 @@ import classes from "./Watchlist.module.css";
 import FilmsList from "../../shared/UIElements/FilmsList/FilmsList";
 import { ServerAPIContext } from "../../shared/context/serverApi-context";
 import { OMDbApiContext } from "../../shared/context/omdbApi-context";
+import { AuthContext } from "../../shared/context/auth-context";
 
 function Watchlist() {
-  const { sendToServerRequest, filmList, setFilmList } =
+  const { filmList, setFilmList, getAllWatchlistMovies } =
     useContext(ServerAPIContext);
+  const { isLoggedIn } = useContext(AuthContext);
   const { page, setTotalResults } = useContext(OMDbApiContext);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    sendToServerRequest(
-      `movie?page=${page}&limit=10`,
-      "GET",
-      undefined,
-      { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      (data) => {
-        setFilmList(data.result);
-        setTotalResults(data.total);
-      }
-    );
+    getAllWatchlistMovies(page, (data) => {
+      setFilmList(data.result);
+      setTotalResults(data.total);
+    });
   }, [page]);
 
   return (
     <div>
-      <FilmsList watch={true} filmList={filmList} />
+      <FilmsList watch={true} filmList={isLoggedIn ? filmList : []} />
     </div>
   );
 }

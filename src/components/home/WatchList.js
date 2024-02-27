@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import classes from "./WatchList.module.css";
 import { MdBookmarkAdd } from "react-icons/md";
 import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";
-import { films } from "../../data/filmData";
-import { generateRandomArray } from "../../utils/util";
 import { AuthContext } from "../../shared/context/auth-context";
 import { Link } from "react-router-dom";
 import { ServerAPIContext } from "../../shared/context/serverApi-context";

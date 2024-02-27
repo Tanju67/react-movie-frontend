@@ -7,7 +7,6 @@ import { Watch } from "react-loader-spinner";
 
 function SearchResult() {
   const searchQuery = useParams().id;
-  console.log(searchQuery);
   const { fetchAllMovies, allMovies, page, isLoading, error } =
     useContext(OMDbApiContext);
 

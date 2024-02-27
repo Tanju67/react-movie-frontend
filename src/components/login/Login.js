@@ -28,7 +28,6 @@ function Login() {
       },
       { "Content-Type": "application/json" },
       (data) => {
-        console.log(data);
         onLogin(data.user.token, { name: data.user.name, id: data.user.id });
         navigate("/");
       }

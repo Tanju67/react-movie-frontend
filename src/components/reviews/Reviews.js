@@ -5,20 +5,26 @@ import ReviewItem from "./ReviewItem";
 import { OMDbApiContext } from "../../shared/context/omdbApi-context";
 import { ServerAPIContext } from "../../shared/context/serverApi-context";
 import { AuthContext } from "../../shared/context/auth-context";
+import { Watch } from "react-loader-spinner";
 
 function Reviews() {
-  const { sendToServerRequest, reviewList, setReviewList } =
-    useContext(ServerAPIContext);
+  const {
+    sendToServerRequest,
+    reviewList,
+    setReviewList,
+    getAllReviews,
+    isLoading,
+    error,
+  } = useContext(ServerAPIContext);
   const { page, setTotalResults, totalResults, setPage } =
     useContext(OMDbApiContext);
-  const totalPage = Math.ceil(totalResults / 10);
+  const totalPage = Math.ceil(totalResults / 5);
   const { user, isLoggedIn } = useContext(AuthContext);
 
   const [tabIndex, setTabIndex] = useState(1);
 
   let filteredReviewList;
   if (tabIndex === 2) {
-    console.log(reviewList);
     filteredReviewList = reviewList.filter(
       (item) => item.createdBy._id === user.id
     );
@@ -27,17 +33,10 @@ function Reviews() {
   }
 
   useEffect(() => {
-    sendToServerRequest(
-      `review?page=${page}&limit=10`,
-      "GET",
-      undefined,
-      { "Content-Type": "application/json" },
-      (data) => {
-        console.log(data);
-        setReviewList(data.result);
-        setTotalResults(data.total);
-      }
-    );
+    getAllReviews(page, (data) => {
+      setReviewList(data.result);
+      setTotalResults(data.total);
+    });
   }, [page]);
 
   const increasePageHandler = () => {
@@ -51,6 +50,19 @@ function Reviews() {
   };
   return (
     <div className={classes.reviewPage}>
+      {error && <p>⛔Something went wrong</p>}
+      {!error && (
+        <Watch
+          visible={isLoading}
+          height="50"
+          width="50"
+          radius="48"
+          color="#4fa94d"
+          ariaLabel="watch-loading"
+          wrapperStyle={{}}
+          wrapperClass={classes.spinner}
+        />
+      )}
       <div className={classes.pageNav}>
         <span className={classes.page}>
           Page: {page} - {totalResults} found
