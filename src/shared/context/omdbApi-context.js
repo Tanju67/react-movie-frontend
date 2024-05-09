@@ -21,6 +21,7 @@ export const OMDbApiContext = createContext({
   fetchDetailMovie: () => {},
 });
 
+const KEY = "a36111d7";
 export const Provider = (props) => {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
@@ -32,7 +33,7 @@ export const Provider = (props) => {
 
   const fetchFilmData = useCallback((controller, query) => {
     sendRequest(
-      `http://www.omdbapi.com/?s=${query}&apikey=${process.env.REACT_APP_API_URL}`,
+      `http://www.omdbapi.com/?s=${query}&apikey=${KEY}`,
       "GET",
       controller,
       undefined,
@@ -45,7 +46,7 @@ export const Provider = (props) => {
 
   const fetchAllMovies = useCallback((page, searchQuery) => {
     sendRequest(
-      `http://www.omdbapi.com/?s=${searchQuery}&page=${page}&apikey=${process.env.REACT_APP_API_URL}`,
+      `http://www.omdbapi.com/?s=${searchQuery}&page=${page}&apikey=${KEY}`,
       "GET",
       undefined,
       undefined,
@@ -59,7 +60,7 @@ export const Provider = (props) => {
 
   const fetchDetailMovie = useCallback((id) => {
     sendRequest(
-      `http://www.omdbapi.com/?i=${id}&apikey=${process.env.REACT_APP_API_URL}`,
+      `http://www.omdbapi.com/?i=${id}&apikey=${KEY}`,
       "GET",
       undefined,
       undefined,

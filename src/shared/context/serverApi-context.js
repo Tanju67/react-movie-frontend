@@ -26,7 +26,7 @@ export const ServerAPIProvider = ({ children }) => {
   const sendToServerRequest = useCallback(
     (endPoint, method, body, headers, fn) => {
       sendRequest(
-        `http://localhost:5000/api/v1/${endPoint}`,
+        process.env.REACT_APP_BACKEND_URL + `/api/v1/${endPoint}`,
         method,
         undefined,
         body,
