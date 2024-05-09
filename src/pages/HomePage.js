@@ -3,8 +3,7 @@ import Home from "../components/home/Home";
 import { ServerAPIContext } from "../shared/context/serverApi-context";
 
 function HomePage() {
-  const { sendToServerRequest, setFilmList, getAllWatchlistMovies } =
-    useContext(ServerAPIContext);
+  const { setFilmList, getAllWatchlistMovies } = useContext(ServerAPIContext);
 
   useEffect(() => {
     getAllWatchlistMovies(undefined, (data) => {

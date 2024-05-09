@@ -11,7 +11,7 @@ export const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { isLoading, error, sendRequest } = useHttpRequest();
+  const { sendRequest } = useHttpRequest();
   const [user, setUser] = useState({});
 
   const loginHandler = (token, user) => {

@@ -218,3 +218,21 @@ hr {
     height: 19rem;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .descriptionHeader {
+    flex-direction: column;
+  }
+
+  .posterSmall {
+    display: block;
+    height: auto;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .posterSmall img {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+  }
+}

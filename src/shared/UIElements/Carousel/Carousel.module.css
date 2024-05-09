@@ -1,0 +1,12 @@
+.mainTitle {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 4rem;
+  color: var(--clr-text);
+}
+
+.subTitle {
+  margin-bottom: 8rem;
+  text-align: center;
+  color: var(--clr-text);
+}

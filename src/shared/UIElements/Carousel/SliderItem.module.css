@@ -1,0 +1,48 @@
+.item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+.poster {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 40rem;
+}
+
+.poster img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1rem 1rem 0 0;
+}
+.info {
+  padding: 1rem;
+  width: 100%;
+  background-color: var(--clr-secondary);
+  height: 10rem;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.info {
+  transition: all 0.3s;
+}
+
+.info:hover {
+  color: var(--clr-btn);
+}
+
+@media only screen and (max-width: 1024px) {
+  .poster {
+    height: 35rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+}
+
+@media only screen and (max-width: 400px) {
+  .poster {
+    height: auto;
+  }
+}

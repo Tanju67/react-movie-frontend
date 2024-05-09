@@ -1,5 +1,5 @@
 .filmList {
-  color: #fff;
+  color: var(--clr-text);
   padding: 2rem;
   max-width: 125rem;
   margin: 0 auto;
@@ -13,12 +13,12 @@
 
 .page {
   padding: 1rem;
-  background-color: #222;
+  background-color: var(--clr-secondary);
 }
 
 .icon {
   padding: 1rem;
-  background-color: #222;
+  background-color: var(--clr-secondary);
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -45,23 +45,20 @@
 }
 
 .item {
-  width: 22rem;
-  height: 42rem;
-
+  width: 18%;
   display: flex;
   flex-direction: column;
 }
 
 .poster {
-  flex: 1;
-  height: 30rem;
+  height: 35rem;
 }
 .poster img {
   width: 100%;
-  height: 30rem;
+  height: 35rem;
 }
 .noPoster {
-  height: 30rem;
+  height: 35rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,14 +66,17 @@
 }
 
 .info {
-  background-color: #222;
-  flex: 1;
+  background-color: var(--clr-secondary);
   padding: 1rem;
+  min-height: 10rem;
 }
 
 @media only screen and (max-width: 1000px) {
   .item {
     width: 23%;
+  }
+  .poster img {
+    object-fit: cover;
   }
 }
 
@@ -99,5 +99,29 @@
   .poster img {
     width: 100%;
     height: 35rem;
+  }
+  .noPoster {
+    width: 100%;
+    height: 35rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .item {
+    width: 100%;
+    height: auto;
+  }
+
+  .poster {
+    flex: 1;
+    height: 45rem;
+  }
+  .poster img {
+    width: 100%;
+    height: 45rem;
+  }
+  .noPoster {
+    width: 100%;
+    height: 45rem;
   }
 }

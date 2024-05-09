@@ -2,7 +2,7 @@
   position: absolute;
   height: 90vh;
   width: 0;
-  background-color: #111;
+  background-color: var(--clr-secondary);
   top: 10vh;
   left: 0;
   transition: all 0.3s ease-in-out;
@@ -31,7 +31,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #000;
+  color: var(--clr-secondary);
 }
 
 .open {

@@ -34,6 +34,7 @@
 }
 .poster {
   height: 7rem;
+  width: 5rem;
 }
 .noPoster {
   height: 7rem;
@@ -47,6 +48,7 @@
 
 .poster img {
   height: 100%;
+  width: 5rem;
 }
 
 .dropdown a {

@@ -1,5 +1,22 @@
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --clr-primary: #183d3d;
+  --clr-primary-shade: #133131;
+  --clr-primary-tint: #466464;
+  --clr-primary-light: #bac5c5;
+  --clr-secondary: #03001c;
+  --clr-secondary-shade: #020016;
+  --clr-secondary-tint: #353349;
+  --clr-secondary-light: #b3b3bb;
+  --clr-text: #fff;
+  --clr-btn: #127d04;
+  --clr-btn-hover: #22e707;
+}
 
 * {
   margin: 0;
@@ -14,17 +31,16 @@ html {
 
 body {
   height: 100vh;
-  background-color: #e7e7e7;
   font-size: 1.6rem;
   font-family: "Poppins", sans-serif;
   width: 100%;
   overflow-x: hidden;
-  background-color: #111;
+  background-color: var(--clr-primary);
 }
 
 a {
   text-decoration: none;
-  color: #fff;
+  color: var(--clr-text);
 }
 
 li {

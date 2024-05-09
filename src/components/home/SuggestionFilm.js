@@ -1,13 +1,13 @@
 import React from "react";
 import classes from "./SuggestionFilm.module.css";
-import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";
 import { films } from "../../data/filmData";
 import { generateRandomArray } from "../../utils/util";
+import Carousel from "../../shared/UIElements/Carousel/Carousel";
 
 function SuggestionFilm() {
   return (
     <div id="suggestions" className={classes.suggest}>
-      <FilmsCarousel
+      <Carousel
         filmList={generateRandomArray(10, films.length, films)}
         subTitle={"Our Suggestions"}
       />

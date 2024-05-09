@@ -1,0 +1,101 @@
+.slide {
+  width: 100%;
+  height: 80vh;
+}
+
+.slideImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.filmInfo {
+  position: absolute;
+  z-index: 100;
+  bottom: 0;
+  height: 18rem;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.9),
+    rgba(0, 0, 0, 1)
+  );
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+.poster {
+  height: 15rem;
+}
+.poster img {
+  height: 15rem;
+}
+.info {
+  align-self: flex-end;
+  color: #fff;
+}
+
+.info {
+  transition: all 0.3s;
+}
+
+.info:hover {
+  color: var(--clr-btn);
+}
+
+.filmInfo .poster img {
+  height: 100%;
+}
+
+@media only screen and (max-width: 850px) {
+  .slide {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+  }
+
+  .slideImg {
+    object-fit: initial;
+    width: 100%;
+  }
+
+  .poster {
+    height: 10rem;
+    align-self: flex-end;
+  }
+  .poster img {
+    height: 10rem;
+  }
+  .info {
+    align-self: flex-end;
+  }
+
+  .filmInfo .poster img {
+    height: 100%;
+  }
+  .filmInfo {
+    height: 10rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .slide {
+    padding: 0 2rem;
+  }
+  .poster {
+    height: 7rem;
+    align-self: flex-end;
+  }
+  .poster img {
+    height: 7rem;
+  }
+
+  .filmInfo {
+    height: 8rem;
+  }
+}

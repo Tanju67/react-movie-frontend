@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Watch } from "react-loader-spinner";
 import classes from "./SearchResult.module.css";
 import FilmsList from "../../shared/UIElements/FilmsList/FilmsList";
 import { OMDbApiContext } from "../../shared/context/omdbApi-context";
-import { useParams } from "react-router-dom";
-import { Watch } from "react-loader-spinner";
 
 function SearchResult() {
   const searchQuery = useParams().id;

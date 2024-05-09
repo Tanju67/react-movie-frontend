@@ -1,12 +1,14 @@
 .reviewItem {
   display: flex;
-  background-color: #222;
+  background-color: var(--clr-primary-shade);
   padding: 2rem;
   gap: 2rem;
   width: 80%;
   margin: 1rem auto;
   color: #aaa;
   position: relative;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  padding-bottom: 10rem;
 }
 .posterBox {
   height: 20rem;
@@ -49,10 +51,6 @@
   bottom: 1rem;
   right: 1rem;
   font-size: 1.4rem;
-}
-
-.reviewText {
-  word-break: break-all;
 }
 
 @media only screen and (max-width: 850px) {

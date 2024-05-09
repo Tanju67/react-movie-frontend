@@ -37,7 +37,7 @@ function SideBar({ isSidebarOpen, setIsSidebarOpen }) {
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/watchlist"}>
+        <NavLink to={isLoggedIn ? "/watchlist" : "/login"}>
           <MdBookmarkAdd />
           <span>Watchlist</span>
         </NavLink>

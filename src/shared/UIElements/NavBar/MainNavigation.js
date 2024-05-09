@@ -103,7 +103,7 @@ function MainNavigation() {
       </div>
 
       <div className={`${classes.box} ${classes.watchlist}`}>
-        <NavLink to={"/watchlist"}>
+        <NavLink to={isLoggedIn ? "/watchlist" : "/login"}>
           <MdBookmarkAdd />
           <span>Watchlist</span>
         </NavLink>

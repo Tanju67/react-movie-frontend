@@ -1,14 +1,16 @@
 .explore {
   flex: 1;
-  background-color: #111;
+
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.25);
   color: #fff;
   padding: 2rem;
 }
 .explore h3 {
-  color: rgb(18, 125, 4);
+  color: var(--clr-text);
   margin-bottom: 1rem;
+  text-decoration: underline;
+  font-size: 3rem;
 }
 
 .films {
@@ -25,7 +27,7 @@
 }
 
 .filmItem:not(:last-child) {
-  border-bottom: 2px solid #222;
+  border-bottom: 2px solid var(--clr-primary-shade);
 }
 
 .poster img {
@@ -33,4 +35,12 @@
 }
 .info {
   align-self: center;
+}
+
+.info {
+  transition: all 0.3s;
+}
+
+.info:hover {
+  color: var(--clr-btn);
 }

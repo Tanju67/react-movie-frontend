@@ -1,12 +1,12 @@
 import React from "react";
 import classes from "./TopTen.module.css";
 import { topTen } from "../../data/filmData";
-import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";
+import Carousel from "../../shared/UIElements/Carousel/Carousel";
 
 function TopTen() {
   return (
     <div id="top10" className={classes.topten}>
-      <FilmsCarousel
+      <Carousel
         filmList={topTen}
         mainTitle={"What to watch"}
         subTitle={"Top 10 Movies >"}

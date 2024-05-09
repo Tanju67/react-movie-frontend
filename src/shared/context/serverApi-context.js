@@ -1,14 +1,14 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { useHttpRequest } from "../hooks/fetchData-hook";
 
 export const ServerAPIContext = createContext({
-  sendToServerRequest: () => {},
   filmList: [],
-  setFilmList: () => {},
   reviewList: [],
-  setReviewList: () => {},
   isLoading: false,
   error: null,
+  sendToServerRequest: () => {},
+  setFilmList: () => {},
+  setReviewList: () => {},
   getAllReviews: () => {},
   createReview: () => {},
   getUserReviews: () => {},

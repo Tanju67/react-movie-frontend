@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import { useContext } from "react";
 import MainNavigation from "./shared/UIElements/NavBar/MainNavigation";
+import HomePage from "./pages/HomePage";
 import WatchlistPage from "./pages/WatchlistPage";
 import FilmDetailPage from "./pages/FilmDetailPage";
 import SearchResultPage from "./pages/SearchResultPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ReviewsPage from "./pages/ReviewsPage";
+import { AuthContext } from "./shared/context/auth-context";
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
       <MainNavigation />
@@ -17,7 +21,7 @@ function App() {
         <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/watchlist" element={<WatchlistPage />} />
+        {isLoggedIn && <Route path="/watchlist" element={<WatchlistPage />} />}
         <Route path="/films/:id" element={<SearchResultPage />} />
         <Route path="/:id" element={<FilmDetailPage />} />
       </Routes>
@@ -26,27 +30,3 @@ function App() {
 }
 
 export default App;
-
-// const KEY = "a36111d7";
-// const query = "";
-
-// const fetchData = async () => {
-//   try {
-//     // const res = await fetch(
-//     //   `http://www.omdbapi.com/?s=${query}&page=1&apikey=${KEY}`
-//     // );
-
-//     // const res = await fetch(
-//     //   `http://www.omdbapi.com/?i=tt1851398&apikey=${KEY}`
-//     // );
-
-//     const res = await fetch(`https://www.mediawiki.org/w/api.php`);
-
-//     if (!res.ok) {
-//       throw new Error("something went wrong");
-//     }
-//     const data = await res.json();
-
-//     console.log(data);
-//   } catch (error) {}
-// };

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import classes from "./WatchList.module.css";
 import { MdBookmarkAdd } from "react-icons/md";
-import FilmsCarousel from "../../shared/UIElements/Carousel/FilmsCarousel";
 import { AuthContext } from "../../shared/context/auth-context";
 import { Link } from "react-router-dom";
 import { ServerAPIContext } from "../../shared/context/serverApi-context";
+import Carousel from "../../shared/UIElements/Carousel/Carousel";
 
 function WatchList() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -31,10 +31,7 @@ function WatchList() {
       )}
       {isLoggedIn && filmList.length !== 0 && (
         <div className={classes.signIn}>
-          <FilmsCarousel
-            filmList={filmList}
-            subTitle={"From Your Watchlist >"}
-          />
+          <Carousel filmList={filmList} subTitle={"From Your Watchlist >"} />
         </div>
       )}
     </div>

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import classes from "./Watchlist.module.css";
 import FilmsList from "../../shared/UIElements/FilmsList/FilmsList";
 import { ServerAPIContext } from "../../shared/context/serverApi-context";
 import { OMDbApiContext } from "../../shared/context/omdbApi-context";
@@ -16,6 +15,13 @@ function Watchlist() {
       setTotalResults(data.total);
     });
   }, [page]);
+  if (!isLoggedIn) {
+    return (
+      <div>
+        <h2>You are not allowed for this route!Please log in.</h2>
+      </div>
+    );
+  }
 
   return (
     <div>

@@ -1,19 +1,16 @@
 .watchlist {
-  padding: 8rem 2rem;
   color: #fff;
-
-  background-color: #111;
   position: relative;
 }
 
 .watchlist h2 {
-  margin-bottom: 1rem;
-  margin-left: 1rem;
+  margin-bottom: 6rem;
 }
 
 .notSignIn {
   text-align: center;
   margin-top: 6rem;
+  padding: 0 4rem;
 }
 
 .notSignIn svg {
@@ -30,11 +27,19 @@
   padding: 0.8rem 4rem;
   font-size: 1.6rem;
   color: #fff;
-  background-color: #222;
+  background-color: var(--clr-btn);
   border: none;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .notSignIn button:hover {
-  background-color: #222922;
+  background-color: var(--clr-btn-hover);
+}
+
+.signIn {
+  max-width: 150rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 8rem 4rem;
 }
